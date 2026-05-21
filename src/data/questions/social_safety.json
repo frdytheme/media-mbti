@@ -1,0 +1,62 @@
+[
+  {
+    "id": "social_01",
+    "order": 1,
+    "categoryId": "social_safety",
+    "question": "자녀가 온라인에서 알게 된 사람과 개인적으로 연락하거나 대화를 이어가는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인에서 알게 된 사람들과 지속적으로 연락하는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_02",
+    "order": 2,
+    "categoryId": "social_safety",
+    "question": "친구들이 사용하는 SNS나 채팅 앱을 “다 하니까” 따라 사용하는 경우가 많나요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      { "id": "d", "label": "친구 관계 때문에 거의 따라 사용하는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_03",
+    "order": 3,
+    "categoryId": "social_safety",
+    "question": "온라인 대화나 SNS 반응(좋아요·댓글 등)에 기분이 크게 영향을 받는 편인가요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 영향을 받는다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 영향을 받는다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인 반응에 따라 기분 변화가 매우 큰 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_04",
+    "order": 4,
+    "categoryId": "social_safety",
+    "question": "온라인 대화나 SNS 사용 화면을 가족에게 급하게 숨기거나 예민하게 반응하는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "화면을 숨기거나 예민하게 반응하는 모습이 반복된다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_05",
+    "order": 5,
+    "categoryId": "social_safety",
+    "question": "자녀가 온라인에서 알게 된 사람을 실제로 만나고 싶어 하거나, 직접 만남에 대한 경계가 낮아 보이는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그런 모습이 보인다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그런 이야기를 하거나 관심을 보인다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인 관계를 실제 만남으로 이어가려는 모습이 반복된다", "scoreDelta": -15 }
+    ]
+  }
+]

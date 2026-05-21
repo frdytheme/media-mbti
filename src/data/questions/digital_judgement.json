@@ -1,0 +1,62 @@
+[
+  {
+    "id": "judgment_01",
+    "order": 1,
+    "categoryId": "digital_judgment",
+    "question": "자녀가 유튜브나 SNS에서 본 내용을 별다른 확인 없이 사실처럼 이야기하는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인에서 본 내용을 거의 그대로 믿는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "judgment_02",
+    "order": 2,
+    "categoryId": "digital_judgment",
+    "question": "조회수·좋아요가 많은 콘텐츠를 “유명하니까 믿을 만하다”는 식으로 이야기하는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그런 반응을 보인다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇게 이야기한다", "scoreDelta": -10 },
+      { "id": "d", "label": "조회수나 반응 수를 신뢰 기준처럼 받아들이는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "judgment_03",
+    "order": 3,
+    "categoryId": "digital_judgment",
+    "question": "“유튜브에서 봤어”, “요즘 유행이야”, “OOO가 추천했어” 같은 이유로 물건을 사달라고 하거나 구매를 원할 때가 많나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "유행이나 추천만으로 구매 욕구가 쉽게 생기는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "judgment_04",
+    "order": 4,
+    "categoryId": "digital_judgment",
+    "question": "자녀가 콘텐츠에 대한 의견을 이야기할 때 “댓글에서 그러던데”, “사람들이 다 그렇대” 같은 표현을 자주 사용하는 편인가요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그런 표현을 사용한다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그런 표현을 사용한다", "scoreDelta": -10 },
+      { "id": "d", "label": "자신의 생각보다 온라인 반응을 기준으로 이야기하는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "judgment_05",
+    "order": 5,
+    "categoryId": "digital_judgment",
+    "question": "자녀가 온라인에서 본 자극적인 영상이나 이야기를 별다른 의심 없이 실제라고 믿는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인에서 본 내용을 실제 사실처럼 쉽게 받아들이는 편이다", "scoreDelta": -15 }
+    ]
+  }
+]

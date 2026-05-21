@@ -1,0 +1,62 @@
+[
+  {
+    "id": "time_01",
+    "order": 1,
+    "categoryId": "time_control",
+    "question": "자녀가 스마트폰이나 게임을 그만하기로 한 시간 이후에도 “조금만 더” 하며 사용 시간이 길어지는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매번 반복된다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "time_02",
+    "order": 2,
+    "categoryId": "time_control",
+    "question": "해야 할 일(숙제, 씻기, 등교 준비 등)을 미루고 스마트폰이나 게임을 먼저 사용하는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매번 반복된다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "time_03",
+    "order": 3,
+    "categoryId": "time_control",
+    "question": "자기 전 스마트폰 사용으로 인해 취침 시간이 늦어지는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매일 반복된다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "time_04",
+    "order": 4,
+    "categoryId": "time_control",
+    "question": "스마트폰이나 게임을 끄라고 하면 자녀가 예민해지거나 짜증 반응이 커지는 편인가요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매번 그렇다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "time_05",
+    "order": 5,
+    "categoryId": "time_control",
+    "question": "스마트폰이나 게임 없이 잠깐 시간을 보내는 것을 어려워하는 모습이 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "스마트폰이나 게임이 없으면 매우 불안해하거나 심심함을 견디기 어려워한다", "scoreDelta": -15 }
+    ]
+  }
+]

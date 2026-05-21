@@ -1,0 +1,62 @@
+[
+  {
+    "id": "content_01",
+    "order": 1,
+    "categoryId": "content_quality",
+    "question": "자녀가 짧고 자극적인 영상(쇼츠·릴스·틱톡 등)을 오랫동안 반복해서 보는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매일 반복된다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "content_02",
+    "order": 2,
+    "categoryId": "content_quality",
+    "question": "욕설·조롱·과격한 말투가 포함된 콘텐츠를 자주 소비하는 모습이 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "일상적으로 자주 접하는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "content_03",
+    "order": 3,
+    "categoryId": "content_quality",
+    "question": "콘텐츠를 오래 소비한 뒤 표정이나 반응이 멍해지거나 집중이 흐려지는 모습이 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "오래 볼수록 멍하거나 무기력해지는 모습이 자주 보인다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "content_04",
+    "order": 4,
+    "categoryId": "content_quality",
+    "question": "자녀가 본 콘텐츠에 대해 자신의 생각이나 느낀 점을 가족과 이야기하는 편인가요?",
+    "options": [
+      { "id": "a", "label": "자주 이야기하는 편이다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 이야기하는 편이다", "scoreDelta": -5 },
+      { "id": "c", "label": "거의 이야기하지 않는다", "scoreDelta": -10 },
+      { "id": "d", "label": "무엇을 보는지 잘 공유하지 않는다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "content_05",
+    "order": 5,
+    "categoryId": "content_quality",
+    "question": "자녀가 특별한 목적 없이 습관적으로 유튜브·쇼츠·SNS를 켜는 모습이 자주 보이나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "심심하거나 잠깐 시간만 나도 바로 켜는 편이다", "scoreDelta": -15 }
+    ]
+  }
+]

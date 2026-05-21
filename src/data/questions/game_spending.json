@@ -1,0 +1,62 @@
+[
+  {
+    "id": "game_01",
+    "order": 1,
+    "categoryId": "game_spending",
+    "question": "게임에서 이기거나 보상을 얻지 못했을 때 감정 기복이 크게 나타나는 편인가요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      { "id": "d", "label": "게임 결과에 따라 기분 변화가 매우 큰 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "game_02",
+    "order": 2,
+    "categoryId": "game_spending",
+    "question": "게임에서 진행 중인 이벤트·출석·한정 보상 등을 놓치는 것에 예민한 편인가요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 신경 쓰는 편이다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 신경 쓰는 편이다", "scoreDelta": -10 },
+      { "id": "d", "label": "놓치지 않기 위해 생활 패턴까지 영향을 받는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "game_03",
+    "order": 3,
+    "categoryId": "game_spending",
+    "question": "게임을 위해 생활 패턴(식사·수면·숙제 등)이 흔들리는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "생활 리듬이 자주 흔들릴 정도다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "game_04",
+    "order": 4,
+    "categoryId": "game_spending",
+    "question": "게임 내 구매나 결제에 대해 “이 정도는 다 한다”는 식으로 이야기하는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그런 이야기를 한다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇게 이야기한다", "scoreDelta": -10 },
+      { "id": "d", "label": "게임 결제를 당연한 문화처럼 받아들이는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "game_05",
+    "order": 5,
+    "categoryId": "game_spending",
+    "question": "이미 그만해야 하는 상황인데도 친구들과의 게임 약속 때문에 조절이 어려워지는 경우가 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "친구들과의 게임 약속 때문에 조절이 자주 어려워진다", "scoreDelta": -15 }
+    ]
+  }
+]

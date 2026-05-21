@@ -1,0 +1,62 @@
+[
+  {
+    "id": "family_01",
+    "order": 1,
+    "categoryId": "family_communication",
+    "question": "자녀가 온라인·게임·콘텐츠와 관련된 이야기를 가족에게 자연스럽게 하는 편인가요?",
+    "options": [
+      { "id": "a", "label": "자주 이야기하는 편이다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 이야기하는 편이다", "scoreDelta": -5 },
+      { "id": "c", "label": "필요할 때만 이야기하는 편이다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 이야기하지 않는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "family_02",
+    "order": 2,
+    "categoryId": "family_communication",
+    "question": "가족이 함께 스마트폰·게임·SNS 사용 기준이나 설정을 이야기하고 점검해본 적이 있나요?",
+    "options": [
+      { "id": "a", "label": "정기적으로 함께 이야기하고 점검하는 편이다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 함께 이야기해본 적 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "문제가 생겼을 때만 이야기하는 편이다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 이야기하거나 점검해본 적 없다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "family_03",
+    "order": 3,
+    "categoryId": "family_communication",
+    "question": "가정에서 미디어 사용에 대한 대화가 “하지 마”보다 “왜 필요한지 설명” 중심으로 이루어지는 편인가요?",
+    "options": [
+      { "id": "a", "label": "설명과 대화 중심으로 이루어지는 편이다", "scoreDelta": 0 },
+      { "id": "b", "label": "설명도 하지만 제한 이야기가 더 많은 편이다", "scoreDelta": -5 },
+      { "id": "c", "label": "주로 제한하거나 조심시키는 대화가 많다", "scoreDelta": -10 },
+      { "id": "d", "label": "대화보다 통제나 갈등으로 끝나는 경우가 많다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "family_04",
+    "order": 4,
+    "categoryId": "family_communication",
+    "question": "자녀가 온라인·게임·콘텐츠 이야기를 했을 때 가족은 주로 어떤 반응을 보이는 편인가요?",
+    "options": [
+      { "id": "a", "label": "자연스럽게 대화를 이어가는 편이다", "scoreDelta": 0 },
+      { "id": "b", "label": "걱정되거나 조심시키는 반응이 많은 편이다", "scoreDelta": -5 },
+      { "id": "c", "label": "바로 제한하거나 하지 말라고 하는 경우가 많다", "scoreDelta": -10 },
+      { "id": "d", "label": "크게 관심을 두지 않는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "family_05",
+    "order": 5,
+    "categoryId": "family_communication",
+    "question": "가족이 모두 함께 앉아 콘텐츠를 보거나 이야기하는 시간이 일주일에 어느 정도 있는 편인가요?",
+    "options": [
+      { "id": "a", "label": "일주일에 여러 번 있는 편이다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있는 편이다", "scoreDelta": -5 },
+      { "id": "c", "label": "거의 없는 편이다", "scoreDelta": -10 },
+      { "id": "d", "label": "함께 콘텐츠를 보거나 이야기하는 시간이 거의 없다", "scoreDelta": -15 }
+    ]
+  }
+]
