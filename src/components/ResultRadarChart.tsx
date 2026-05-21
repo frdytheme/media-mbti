@@ -1,12 +1,12 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import {
   PolarAngleAxis,
   PolarGrid,
   PolarRadiusAxis,
   Radar,
   RadarChart,
-  ResponsiveContainer,
   Tooltip,
 } from "recharts";
 
@@ -21,6 +21,11 @@ type ChartDatum = {
   categoryId: string;
   name: string;
   score: number;
+};
+
+type ChartSize = {
+  width: number;
+  height: number;
 };
 
 export type ResultRadarChartProps = {
@@ -40,6 +45,8 @@ export default function ResultRadarChart({
   scores,
   className = "",
 }: ResultRadarChartProps) {
+  const chartContainerRef = useRef<HTMLDivElement>(null);
+  const [chartSize, setChartSize] = useState<ChartSize | null>(null);
   const chartData: ChartDatum[] = (categories as Category[]).map(
     (category) => ({
       categoryId: category.id,
@@ -48,14 +55,63 @@ export default function ResultRadarChart({
     }),
   );
 
+  useEffect(() => {
+    const container = chartContainerRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    const updateChartSize = () => {
+      const { width, height } = container.getBoundingClientRect();
+      const nextWidth = Math.floor(width);
+      const nextHeight = Math.floor(height);
+
+      if (nextWidth <= 0 || nextHeight <= 0) {
+        return;
+      }
+
+      setChartSize((previousSize) => {
+        if (
+          previousSize?.width === nextWidth &&
+          previousSize.height === nextHeight
+        ) {
+          return previousSize;
+        }
+
+        return {
+          width: nextWidth,
+          height: nextHeight,
+        };
+      });
+    };
+
+    const animationFrame = window.requestAnimationFrame(updateChartSize);
+    const resizeObserver = new ResizeObserver(updateChartSize);
+    resizeObserver.observe(container);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
   return (
     <section
       className={`w-full rounded-lg border border-zinc-200 bg-white p-4 shadow-sm sm:p-6 dark:border-zinc-800 dark:bg-zinc-950 ${className}`}
       aria-label="진단 결과 레이더 차트"
     >
-      <div className="h-72 w-full sm:h-96">
-        <ResponsiveContainer width="100%" height="100%">
-          <RadarChart data={chartData} outerRadius="70%">
+      <div
+        ref={chartContainerRef}
+        className="h-72 min-h-72 w-full min-w-0 sm:h-96 sm:min-h-96"
+      >
+        {chartSize ? (
+          <RadarChart
+            data={chartData}
+            height={chartSize.height}
+            outerRadius="70%"
+            width={chartSize.width}
+          >
             <PolarGrid stroke="#d4d4d8" />
             <PolarAngleAxis
               dataKey="name"
@@ -80,7 +136,7 @@ export default function ResultRadarChart({
               strokeWidth={2}
             />
           </RadarChart>
-        </ResponsiveContainer>
+        ) : null}
       </div>
 
       <ul className="mt-6 grid gap-3 sm:grid-cols-2">

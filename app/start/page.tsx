@@ -15,7 +15,7 @@ export default function StartPage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <Link
-            href="/result"
+            href="/test?restart=1"
             className="flex min-h-36 cursor-pointer flex-col justify-between rounded-lg border border-blue-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md active:translate-y-0 dark:border-blue-900 dark:bg-zinc-900 dark:hover:bg-blue-950"
           >
             <span className="text-xl font-bold text-zinc-950 dark:text-zinc-50">
