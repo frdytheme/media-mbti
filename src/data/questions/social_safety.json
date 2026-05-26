@@ -8,7 +8,11 @@
       { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
       { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
       { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
-      { "id": "d", "label": "온라인에서 알게 된 사람들과 지속적으로 연락하는 편이다", "scoreDelta": -15 }
+      {
+        "id": "d",
+        "label": "온라인에서 알게 된 사람들과 지속적으로 연락하는 편이다",
+        "scoreDelta": -15
+      }
     ]
   },
   {
@@ -56,7 +60,91 @@
       { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
       { "id": "b", "label": "가끔 그런 모습이 보인다", "scoreDelta": -5 },
       { "id": "c", "label": "자주 그런 이야기를 하거나 관심을 보인다", "scoreDelta": -10 },
-      { "id": "d", "label": "온라인 관계를 실제 만남으로 이어가려는 모습이 반복된다", "scoreDelta": -15 }
+      {
+        "id": "d",
+        "label": "온라인 관계를 실제 만남으로 이어가려는 모습이 반복된다",
+        "scoreDelta": -15
+      }
+    ]
+  },
+  {
+    "id": "social_06",
+    "order": 6,
+    "categoryId": "social_safety",
+    "question": "단체 채팅방이나 SNS에서 친구들이 올린 놀림·장난·민감한 콘텐츠 이야기를 자주 하는 편인가요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 이야기한다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 이야기하거나 반응한다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "문제가 될 수 있는 이야기나 콘텐츠도 장난처럼 자주 소비하는 편이다",
+        "scoreDelta": -15
+      }
+    ]
+  },
+  {
+    "id": "social_07",
+    "order": 7,
+    "categoryId": "social_safety",
+    "question": "친구 관계 때문에 단체 채팅방이나 SNS 분위기에서 빠지지 않으려는 모습이 보이나요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그런 모습이 보인다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 분위기를 신경 쓰는 편이다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "소외될까 봐 대부분 분위기에 맞추려는 모습이 반복된다",
+        "scoreDelta": -15
+      }
+    ]
+  },
+  {
+    "id": "social_08",
+    "order": 8,
+    "categoryId": "social_safety",
+    "question": "온라인에서 본 놀림·밈·캡처·영상 등을 가족에게 ‘장난이었다’며 이야기한 적이 있나요?",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있는 편이다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "문제가 될 수 있는 상황도 가볍게 이야기하거나 소비하는 편이다",
+        "scoreDelta": -15
+      }
+    ]
+  },
+  {
+    "id": "social_09",
+    "order": 9,
+    "categoryId": "social_safety",
+    "question": "단체 채팅방이나 SNS 알림에 바로 반응해야 한다는 압박감을 느끼는 모습이 보이나요?",
+    "options": [
+      { "id": "a", "label": "거의 보이지 않는다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 신경 쓰는 모습이 보인다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 즉각적으로 반응하려 한다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "알림이나 단톡 분위기에 매우 민감하게 반응하는 편이다",
+        "scoreDelta": -15
+      }
+    ]
+  },
+  {
+    "id": "social_10",
+    "order": 10,
+    "categoryId": "social_safety",
+    "question": "온라인에서 불편한 상황이 있었을 때, ‘싫다’거나 ‘그만하고 싶다’는 표현을 어려워하는 모습이 보이나요?",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 어려워한다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 어려워한다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "불편해도 거절하거나 멈춰달라고 표현하기 매우 어려워한다",
+        "scoreDelta": -15
+      }
     ]
   }
 ]

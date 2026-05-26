@@ -176,8 +176,8 @@ export default function TestPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-50 px-4 py-8 text-zinc-950 sm:px-6 dark:bg-zinc-950 dark:text-zinc-50">
-      <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
+    <main className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 py-8 text-zinc-950 sm:px-6 sm:py-12 dark:bg-zinc-950 dark:text-zinc-50">
+      <div className="flex w-full max-w-2xl -translate-y-2 flex-col gap-6 sm:-translate-y-4">
         <header className="flex flex-col gap-3">
           <div className="flex items-center justify-between text-sm font-medium text-zinc-500 dark:text-zinc-400">
             <span>

@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 import ResultRadarChart from "../../src/components/ResultRadarChart";
 import categories from "../../src/data/categories.json";
 import contentQualityReport from "../../src/data/reports/content-quality-report.json";
+import digitalJudgmentReport from "../../src/data/reports/digital-judgment-report.json";
+import familyCommunicationReport from "../../src/data/reports/family-communication-report.json";
+import gameSpendingReport from "../../src/data/reports/game-spending-report.json";
+import socialSafetyReport from "../../src/data/reports/social-safety-report.json";
 import timeControlReport from "../../src/data/reports/time-control-report.json";
 import { calculateCategoryScores } from "../../src/lib/scoring";
 import {
@@ -58,7 +62,38 @@ const PREVIEW_SCORES: Record<string, number> = {
 const AVAILABLE_REPORTS = [
   timeControlReport as CategoryReport,
   contentQualityReport as CategoryReport,
+  socialSafetyReport as CategoryReport,
+  gameSpendingReport as CategoryReport,
+  digitalJudgmentReport as CategoryReport,
+  familyCommunicationReport as CategoryReport,
 ];
+
+const TEST_RANGE_SCORES: Record<string, number> = {
+  stable: 92,
+  watch: 77,
+  adjustment: 60,
+  priority: 35,
+};
+
+function buildPreviewScores(categoryId?: string | null, range?: string | null) {
+  if (!categoryId || !range || !TEST_RANGE_SCORES[range]) {
+    if (!range || !TEST_RANGE_SCORES[range]) {
+      return PREVIEW_SCORES;
+    }
+
+    return Object.fromEntries(
+      (categories as Category[]).map((category) => [
+        category.id,
+        TEST_RANGE_SCORES[range],
+      ]),
+    );
+  }
+
+  return {
+    ...PREVIEW_SCORES,
+    [categoryId]: TEST_RANGE_SCORES[range],
+  };
+}
 
 function loadStoredAnswers(): StoredAnswer[] {
   if (typeof window === "undefined") {
@@ -91,11 +126,12 @@ function getSpeakerLabel(speaker: ConversationLine["speaker"]) {
 export default function ResultPage() {
   const [answers, setAnswers] = useState<StoredAnswer[]>([]);
   const [isPreview, setIsPreview] = useState(false);
+  const [previewScores, setPreviewScores] = useState(PREVIEW_SCORES);
   const categoryIds = (categories as Category[]).map((category) => category.id);
   const hasStoredAnswers = answers.length > 0;
   const shouldShowResult = hasStoredAnswers || isPreview;
   const scores = isPreview
-    ? PREVIEW_SCORES
+    ? previewScores
     : calculateCategoryScores(answers, categoryIds);
   const totalScore = categoryIds.reduce(
     (sum, categoryId) => sum + (scores[categoryId] ?? 0),
@@ -105,8 +141,13 @@ export default function ResultPage() {
 
   useEffect(() => {
     queueMicrotask(() => {
-      setIsPreview(
-        new URLSearchParams(window.location.search).get("preview") === "1",
+      const searchParams = new URLSearchParams(window.location.search);
+      setIsPreview(searchParams.get("preview") === "1");
+      setPreviewScores(
+        buildPreviewScores(
+          searchParams.get("category"),
+          searchParams.get("range"),
+        ),
       );
       setAnswers(loadStoredAnswers());
     });
