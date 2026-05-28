@@ -1,8 +1,11 @@
 import Link from "next/link";
 
+import HomeNavigation from "../../src/components/HomeNavigation";
+
 export default function StartPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-zinc-50 px-4 py-10 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+      <HomeNavigation />
       <section className="flex w-full max-w-2xl flex-col gap-8">
         <header className="flex flex-col gap-3 text-center">
           <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">

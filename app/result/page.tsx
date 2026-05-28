@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 
+import HomeNavigation from "../../src/components/HomeNavigation";
 import ResultRadarChart from "../../src/components/ResultRadarChart";
 import categories from "../../src/data/categories.json";
 import contentQualityReport from "../../src/data/reports/content-quality-report.json";
@@ -31,8 +33,22 @@ type ConversationLine = {
 
 type ConversationExample = {
   title: string;
+  resourceLink?: string;
+  resourceLinks?: ResourceLink[];
   dialogue: ConversationLine[];
 };
+
+type ResourceLink =
+  | string
+  | {
+      label?: string;
+      name?: string;
+      text?: string;
+      title?: string;
+      link?: string;
+      url?: string;
+      href?: string;
+    };
 
 type ReportRange = {
   min: number;
@@ -74,6 +90,8 @@ const TEST_RANGE_SCORES: Record<string, number> = {
   adjustment: 60,
   priority: 35,
 };
+
+const LEAVE_RESULT_MESSAGE = "결과 페이지에서 나가시겠습니까?";
 
 function buildPreviewScores(categoryId?: string | null, range?: string | null) {
   if (!categoryId || !range || !TEST_RANGE_SCORES[range]) {
@@ -123,7 +141,97 @@ function getSpeakerLabel(speaker: ConversationLine["speaker"]) {
   return speaker === "parent" ? "부모" : "아이";
 }
 
+function getResourceLinks(example: ConversationExample) {
+  const resourceLinks = example.resourceLinks ?? [];
+  const normalizedLinks = resourceLinks
+    .map((link, index) => {
+      if (typeof link === "string") {
+        return link ? { href: link, label: `자료 ${index + 1}` } : null;
+      }
+
+      const href = link.url || link.href || link.link;
+
+      if (!href) {
+        return null;
+      }
+
+      return {
+        href,
+        label:
+          link.label || link.title || link.name || link.text || `자료 ${index + 1}`,
+      };
+    })
+    .filter((link): link is { href: string; label: string } => Boolean(link));
+
+  if (normalizedLinks.length > 0) {
+    return normalizedLinks;
+  }
+
+  return example.resourceLink
+    ? [{ href: example.resourceLink, label: "자료 보기" }]
+    : [];
+}
+
+function splitReportParagraphs(text: string) {
+  const sentences: string[] = [];
+  let currentSentence = "";
+  let isInsideQuote = false;
+
+  for (const character of text.replace(/\s+/g, " ").trim()) {
+    currentSentence += character;
+
+    if (character === '"') {
+      isInsideQuote = !isInsideQuote;
+      continue;
+    }
+
+    if (character === "“") {
+      isInsideQuote = true;
+      continue;
+    }
+
+    if (character === "”") {
+      isInsideQuote = false;
+      continue;
+    }
+
+    if (!isInsideQuote && [".", "?", "!", "。", "？", "！"].includes(character)) {
+      sentences.push(currentSentence.trim());
+      currentSentence = "";
+    }
+  }
+
+  if (currentSentence.trim()) {
+    sentences.push(currentSentence.trim());
+  }
+
+  if (sentences.length <= 2) {
+    return [text.trim()];
+  }
+
+  const paragraphs: string[] = [];
+
+  for (let index = 0; index < sentences.length; index += 2) {
+    paragraphs.push(sentences.slice(index, index + 2).join(" "));
+  }
+
+  return paragraphs;
+}
+
+function ReportText({ text }: { text: string }) {
+  return (
+    <div className="space-y-3">
+      {splitReportParagraphs(text).map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
+      ))}
+    </div>
+  );
+}
+
 export default function ResultPage() {
+  const router = useRouter();
+  const hasNavigationGuard = useRef(false);
+  const allowNavigation = useRef(false);
   const [answers, setAnswers] = useState<StoredAnswer[]>([]);
   const [isPreview, setIsPreview] = useState(false);
   const [previewScores, setPreviewScores] = useState(PREVIEW_SCORES);
@@ -153,8 +261,65 @@ export default function ResultPage() {
     });
   }, []);
 
+  useEffect(() => {
+    function handleBeforeUnload(event: BeforeUnloadEvent) {
+      if (allowNavigation.current) {
+        return;
+      }
+
+      event.preventDefault();
+      event.returnValue = LEAVE_RESULT_MESSAGE;
+    }
+
+    function handlePopState() {
+      if (allowNavigation.current) {
+        return;
+      }
+
+      if (window.confirm(LEAVE_RESULT_MESSAGE)) {
+        allowNavigation.current = true;
+        router.push("/");
+        return;
+      }
+
+      window.history.pushState({ resultGuard: true }, "", window.location.href);
+    }
+
+    if (!hasNavigationGuard.current) {
+      window.history.pushState({ resultGuard: true }, "", window.location.href);
+      hasNavigationGuard.current = true;
+    }
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [router]);
+
+  function confirmResultNavigation(event?: MouseEvent<HTMLAnchorElement>) {
+    if (!window.confirm(LEAVE_RESULT_MESSAGE)) {
+      event?.preventDefault();
+      return false;
+    }
+
+    allowNavigation.current = true;
+    return true;
+  }
+
+  function goHomeFromResult() {
+    if (!confirmResultNavigation()) {
+      return;
+    }
+
+    router.push("/");
+  }
+
   return (
     <main className="min-h-screen bg-zinc-50 px-4 py-8 text-zinc-950 sm:px-6 dark:bg-zinc-950 dark:text-zinc-50">
+      <HomeNavigation onNavigate={confirmResultNavigation} />
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
         <header className="flex flex-col gap-2">
           <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
@@ -230,17 +395,17 @@ export default function ResultPage() {
                       </p>
                     </div>
 
-                    <p className="mt-4 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
-                      {matchedRange.description}
-                    </p>
+                    <div className="mt-4 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+                      <ReportText text={matchedRange.description} />
+                    </div>
 
                     <div className="mt-5 rounded-md bg-blue-50 p-4 dark:bg-blue-950">
                       <p className="text-sm font-bold text-blue-700 dark:text-blue-200">
                         관찰 포인트
                       </p>
-                      <p className="mt-2 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
-                        {matchedRange.watchPoint}
-                      </p>
+                      <div className="mt-2 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+                        <ReportText text={matchedRange.watchPoint} />
+                      </div>
                     </div>
 
                     {matchedRange.conversationExamples?.length ? (
@@ -269,6 +434,21 @@ export default function ResultPage() {
                                 </p>
                               ))}
                             </div>
+                            {getResourceLinks(example).length > 0 ? (
+                              <div className="mt-4 flex flex-wrap gap-2">
+                                {getResourceLinks(example).map((link) => (
+                                  <a
+                                    key={`${example.title}-${link.href}`}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="inline-flex h-10 items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md active:translate-y-0"
+                                  >
+                                    {link.label}
+                                  </a>
+                                ))}
+                              </div>
+                            ) : null}
                           </div>
                         ))}
                       </div>
@@ -278,9 +458,17 @@ export default function ResultPage() {
               })}
             </section>
 
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={goHomeFromResult}
+                className="inline-flex h-11 cursor-pointer items-center rounded-md border border-zinc-300 px-5 text-sm font-semibold text-zinc-700 transition hover:-translate-y-0.5 hover:border-zinc-500 hover:bg-white hover:shadow-sm active:translate-y-0 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-900"
+              >
+                뒤로가기
+              </button>
               <Link
                 href="/test"
+                onClick={confirmResultNavigation}
                 className="inline-flex h-11 cursor-pointer items-center rounded-md border border-zinc-300 px-5 text-sm font-semibold text-zinc-700 transition hover:-translate-y-0.5 hover:border-zinc-500 hover:bg-white hover:shadow-sm active:translate-y-0 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-900"
               >
                 다시 보기

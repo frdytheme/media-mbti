@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { type FormEvent, useState } from "react";
 
-const DEV_MODE_PASSWORD = "whyme";
+const DEV_MODE_PASSWORD = "0000";
+const DEV_MODE_STORAGE_KEY = "media-mbti-dev-mode";
 
 const REPORT_RANGES = [
   {
@@ -33,7 +34,13 @@ const REPORT_RANGES = [
 ];
 
 export default function Home() {
-  const [isDeveloperMode, setIsDeveloperMode] = useState(false);
+  const [isDeveloperMode, setIsDeveloperMode] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return window.sessionStorage.getItem(DEV_MODE_STORAGE_KEY) === "true";
+  });
   const [isPasswordFormOpen, setIsPasswordFormOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -42,6 +49,7 @@ export default function Home() {
     event.preventDefault();
 
     if (password === DEV_MODE_PASSWORD) {
+      window.sessionStorage.setItem(DEV_MODE_STORAGE_KEY, "true");
       setIsDeveloperMode(true);
       setIsPasswordFormOpen(false);
       setPassword("");
@@ -50,6 +58,11 @@ export default function Home() {
     }
 
     setPasswordError("패스워드를 다시 확인해주세요.");
+  }
+
+  function closeDeveloperMode() {
+    window.sessionStorage.removeItem(DEV_MODE_STORAGE_KEY);
+    setIsDeveloperMode(false);
   }
 
   return (
@@ -84,7 +97,7 @@ export default function Home() {
           ) : (
             <button
               type="button"
-              onClick={() => setIsDeveloperMode(false)}
+              onClick={closeDeveloperMode}
               className="inline-flex h-10 cursor-pointer items-center justify-center rounded-md border border-zinc-300 px-4 text-sm font-semibold text-zinc-600 transition hover:-translate-y-0.5 hover:border-zinc-500 hover:bg-white hover:shadow-sm active:translate-y-0 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500 dark:hover:bg-zinc-900"
             >
               개발자 모드 닫기
