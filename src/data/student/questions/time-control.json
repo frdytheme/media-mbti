@@ -1,0 +1,66 @@
+[
+  {
+    "id": "time_01",
+    "order": 1,
+    "categoryId": "time_control",
+    "question": "나는 \"조금만 더\" 하다가 생각보다 오래 스마트폰이나 게임을 할 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매번 그렇다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "time_02",
+    "order": 2,
+    "categoryId": "time_control",
+    "question": "나는 해야 할 일(숙제, 씻기, 준비물 챙기기 등)이 있어도 스마트폰이나 게임을 먼저 할 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매번 그렇다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "time_03",
+    "order": 3,
+    "categoryId": "time_control",
+    "question": "나는 자기 전 스마트폰이나 영상을 보다 보면 원래 자려던 시간보다 늦게 잘 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매일 그렇다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "time_04",
+    "order": 4,
+    "categoryId": "time_control",
+    "question": "스마트폰이나 게임을 그만해야 할 때 짜증이 나거나 아쉬운 마음이 크게 들 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      { "id": "d", "label": "거의 매번 그렇다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "time_05",
+    "order": 5,
+    "categoryId": "time_control",
+    "question": "심심할 때 스마트폰이나 게임 없이 시간을 보내는 것이 어렵게 느껴질 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "스마트폰이나 게임이 없으면 매우 심심하거나 불안하게 느껴진다",
+        "scoreDelta": -15
+      }
+    ]
+  }
+]

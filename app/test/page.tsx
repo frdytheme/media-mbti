@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 
 import HomeNavigation from "../../src/components/HomeNavigation";
 import {
-  questions,
-  SHUFFLED_QUESTIONS_STORAGE_KEY,
-  TEST_ANSWERS_STORAGE_KEY,
+  getQuestionsForAudience,
+  getShuffledQuestionsStorageKey,
+  getTestAnswersStorageKey,
+  getTestAudience,
   type Question,
   type StoredAnswer,
+  type TestAudience,
 } from "../../src/lib/questions";
 
 type AnswerMap = Record<string, StoredAnswer>;
@@ -17,12 +19,20 @@ type AnswerMap = Record<string, StoredAnswer>;
 const LEAVE_TEST_MESSAGE =
   "테스트 진행 사항이 초기화될 수 있습니다 이동하시겠습니까?";
 
-function loadStoredAnswers(): AnswerMap {
+function loadStoredAnswers(audience: TestAudience): AnswerMap {
   if (typeof window === "undefined") {
     return {};
   }
 
-  const storedValue = window.localStorage.getItem(TEST_ANSWERS_STORAGE_KEY);
+  let storedValue: string | null = null;
+
+  try {
+    storedValue = window.localStorage.getItem(
+      getTestAnswersStorageKey(audience),
+    );
+  } catch {
+    return {};
+  }
 
   if (!storedValue) {
     return {};
@@ -49,14 +59,23 @@ function shuffleQuestions(sourceQuestions: Question[]): Question[] {
   return shuffledQuestions;
 }
 
-function loadShuffledQuestions(): Question[] | null {
+function loadShuffledQuestions(
+  audience: TestAudience,
+  sourceQuestions: Question[],
+): Question[] | null {
   if (typeof window === "undefined") {
     return null;
   }
 
-  const storedValue = window.localStorage.getItem(
-    SHUFFLED_QUESTIONS_STORAGE_KEY,
-  );
+  let storedValue: string | null = null;
+
+  try {
+    storedValue = window.localStorage.getItem(
+      getShuffledQuestionsStorageKey(audience),
+    );
+  } catch {
+    return null;
+  }
 
   if (!storedValue) {
     return null;
@@ -64,7 +83,7 @@ function loadShuffledQuestions(): Question[] | null {
 
   try {
     const parsedQuestions = JSON.parse(storedValue) as Question[];
-    const hasAllQuestions = parsedQuestions.length === questions.length;
+    const hasAllQuestions = parsedQuestions.length === sourceQuestions.length;
 
     if (!hasAllQuestions) {
       return null;
@@ -76,11 +95,18 @@ function loadShuffledQuestions(): Question[] | null {
   }
 }
 
-function saveShuffledQuestions(nextQuestions: Question[]) {
-  window.localStorage.setItem(
-    SHUFFLED_QUESTIONS_STORAGE_KEY,
-    JSON.stringify(nextQuestions),
-  );
+function saveShuffledQuestions(
+  audience: TestAudience,
+  nextQuestions: Question[],
+) {
+  try {
+    window.localStorage.setItem(
+      getShuffledQuestionsStorageKey(audience),
+      JSON.stringify(nextQuestions),
+    );
+  } catch {
+    // Storage can be unavailable in some mobile/privacy contexts.
+  }
 }
 
 export default function TestPage() {
@@ -145,37 +171,56 @@ export default function TestPage() {
 
   useEffect(() => {
     queueMicrotask(() => {
-      const shouldRestart =
-        new URLSearchParams(window.location.search).get("restart") === "1";
+      const searchParams = new URLSearchParams(window.location.search);
+      const audience = getTestAudience(searchParams.get("audience"));
+      const sourceQuestions = getQuestionsForAudience(audience);
+      const storedQuestions = loadShuffledQuestions(audience, sourceQuestions);
+      const shouldRestart = searchParams.get("restart") === "1";
       const nextQuestions =
-        shouldRestart || !loadShuffledQuestions()
-          ? shuffleQuestions(questions)
-          : loadShuffledQuestions();
+        shouldRestart || !storedQuestions
+          ? shuffleQuestions(sourceQuestions)
+          : storedQuestions;
 
       if (!nextQuestions) {
         return;
       }
 
       if (shouldRestart) {
-        window.localStorage.removeItem(TEST_ANSWERS_STORAGE_KEY);
-        window.history.replaceState(null, "", "/test");
+        try {
+          window.localStorage.removeItem(getTestAnswersStorageKey(audience));
+        } catch {
+          // Storage can be unavailable in some mobile/privacy contexts.
+        }
+        window.history.replaceState(
+          null,
+          "",
+          audience === "student" ? "/test?audience=student" : "/test",
+        );
         setAnswers({});
       } else {
-        setAnswers(loadStoredAnswers());
+        setAnswers(loadStoredAnswers(audience));
       }
 
-      saveShuffledQuestions(nextQuestions);
+      saveShuffledQuestions(audience, nextQuestions);
       setCurrentIndex(0);
       setTestQuestions(nextQuestions);
     });
   }, []);
 
   function saveAnswers(nextAnswers: AnswerMap) {
-    setAnswers(nextAnswers);
-    window.localStorage.setItem(
-      TEST_ANSWERS_STORAGE_KEY,
-      JSON.stringify(nextAnswers),
+    const audience = getTestAudience(
+      new URLSearchParams(window.location.search).get("audience"),
     );
+
+    setAnswers(nextAnswers);
+    try {
+      window.localStorage.setItem(
+        getTestAnswersStorageKey(audience),
+        JSON.stringify(nextAnswers),
+      );
+    } catch {
+      // Keep the in-memory answers so the current session can continue.
+    }
   }
 
   function handleSelect(optionId: string, scoreDelta: number) {
@@ -207,7 +252,12 @@ export default function TestPage() {
 
     if (isLastQuestion) {
       allowNavigation.current = true;
-      router.push("/result");
+      const audience = getTestAudience(
+        new URLSearchParams(window.location.search).get("audience"),
+      );
+      router.push(
+        audience === "student" ? "/result?audience=student" : "/result",
+      );
       return;
     }
 

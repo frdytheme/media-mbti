@@ -57,6 +57,53 @@
               "url": "https://whyme-media-archive.vercel.app/resources/game-minimum-checklist"
             }
           ]
+        },
+        {
+          "title": "뉴비(초보)가 되어 아이의 세계 들어가기 [역할 전환 교육]",
+          "dialogue": [
+            {
+              "speaker": "parent",
+              "text": "엄마가 생각해봤는데, 사실 네가 하는 게임 하나도 모르겠더라. 엄마도 해보고 싶은데 네가 좀 알려줄래?"
+            },
+            {
+              "speaker": "child",
+              "text": "진짜 할 거야?"
+            },
+            {
+              "speaker": "parent",
+              "text": "응. 근데 엄마는 완전 초보라서 뭘 눌러야 하는지도 모르겠어. 스승님 도움이 필요할 것 같은데?"
+            },
+            {
+              "speaker": "child",
+              "text": "알겠음. 내가 알려줄게!"
+            },
+            {
+              "speaker": "parent",
+              "text": "근데 해보니까 생각보다 어렵네. 채팅창 보니까 말도 좀 세고... 엄마는 괜히 무섭던데?"
+            },
+            {
+              "speaker": "child",
+              "text": "엄마, 저런 애들 많아. 그냥 무시해. 내가 채팅 끄는 법 알려줄게."
+            },
+            {
+              "speaker": "parent",
+              "text": "오, 그런 것도 되는구나. 엄마는 그것도 몰랐네."
+            },
+            {
+              "speaker": "parent",
+              "text": "그리고 엄마가 직접 해보니까 왜 밥 먹으라고 해도 바로 못 나오는지 조금 알겠다. 안 나오는 게 아니라 못 나오는 상황도 있구나."
+            },
+            {
+              "speaker": "child",
+              "text": "맞아. 중간에 나가면 팀원들한테 피해 가는 게임도 많음."
+            },
+            {
+              "speaker": "parent",
+              "text": "그러네. 엄마는 네 게임을 이해하게 되고, 너는 엄마를 도와주고. 가끔 이렇게 같은 팀 해보는 것도 괜찮겠다."
+            }
+          ],
+          "resourceLink": "",
+          "resourceLinks": []
         }
       ]
     },
@@ -107,6 +154,53 @@
               "url": "https://whyme-media-archive.vercel.app/resources/game-minimum-checklist"
             }
           ]
+        },
+        {
+          "title": "뉴비(초보)가 되어 아이의 세계 들어가기 [역할 전환 교육]",
+          "dialogue": [
+            {
+              "speaker": "parent",
+              "text": "엄마가 생각해봤는데, 사실 네가 하는 게임 하나도 모르겠더라. 엄마도 해보고 싶은데 네가 좀 알려줄래?"
+            },
+            {
+              "speaker": "child",
+              "text": "진짜 할 거야?"
+            },
+            {
+              "speaker": "parent",
+              "text": "응. 근데 엄마는 완전 초보라서 뭘 눌러야 하는지도 모르겠어. 스승님 도움이 필요할 것 같은데?"
+            },
+            {
+              "speaker": "child",
+              "text": "알겠음. 내가 알려줄게!"
+            },
+            {
+              "speaker": "parent",
+              "text": "근데 해보니까 생각보다 어렵네. 채팅창 보니까 말도 좀 세고... 엄마는 괜히 무섭던데?"
+            },
+            {
+              "speaker": "child",
+              "text": "엄마, 저런 애들 많아. 그냥 무시해. 내가 채팅 끄는 법 알려줄게."
+            },
+            {
+              "speaker": "parent",
+              "text": "오, 그런 것도 되는구나. 엄마는 그것도 몰랐네."
+            },
+            {
+              "speaker": "parent",
+              "text": "그리고 엄마가 직접 해보니까 왜 밥 먹으라고 해도 바로 못 나오는지 조금 알겠다. 안 나오는 게 아니라 못 나오는 상황도 있구나."
+            },
+            {
+              "speaker": "child",
+              "text": "맞아. 중간에 나가면 팀원들한테 피해 가는 게임도 많음."
+            },
+            {
+              "speaker": "parent",
+              "text": "그러네. 엄마는 네 게임을 이해하게 되고, 너는 엄마를 도와주고. 가끔 이렇게 같은 팀 해보는 것도 괜찮겠다."
+            }
+          ],
+          "resourceLink": "",
+          "resourceLinks": []
         }
       ]
     },
@@ -157,6 +251,53 @@
               "url": "https://whyme-media-archive.vercel.app/resources/game-minimum-checklist"
             }
           ]
+        },
+        {
+          "title": "뉴비(초보)가 되어 아이의 세계 들어가기 [역할 전환 교육]",
+          "dialogue": [
+            {
+              "speaker": "parent",
+              "text": "엄마가 생각해봤는데, 사실 네가 하는 게임 하나도 모르겠더라. 엄마도 해보고 싶은데 네가 좀 알려줄래?"
+            },
+            {
+              "speaker": "child",
+              "text": "진짜 할 거야?"
+            },
+            {
+              "speaker": "parent",
+              "text": "응. 근데 엄마는 완전 초보라서 뭘 눌러야 하는지도 모르겠어. 스승님 도움이 필요할 것 같은데?"
+            },
+            {
+              "speaker": "child",
+              "text": "알겠음. 내가 알려줄게!"
+            },
+            {
+              "speaker": "parent",
+              "text": "근데 해보니까 생각보다 어렵네. 채팅창 보니까 말도 좀 세고... 엄마는 괜히 무섭던데?"
+            },
+            {
+              "speaker": "child",
+              "text": "엄마, 저런 애들 많아. 그냥 무시해. 내가 채팅 끄는 법 알려줄게."
+            },
+            {
+              "speaker": "parent",
+              "text": "오, 그런 것도 되는구나. 엄마는 그것도 몰랐네."
+            },
+            {
+              "speaker": "parent",
+              "text": "그리고 엄마가 직접 해보니까 왜 밥 먹으라고 해도 바로 못 나오는지 조금 알겠다. 안 나오는 게 아니라 못 나오는 상황도 있구나."
+            },
+            {
+              "speaker": "child",
+              "text": "맞아. 중간에 나가면 팀원들한테 피해 가는 게임도 많음."
+            },
+            {
+              "speaker": "parent",
+              "text": "그러네. 엄마는 네 게임을 이해하게 되고, 너는 엄마를 도와주고. 가끔 이렇게 같은 팀 해보는 것도 괜찮겠다."
+            }
+          ],
+          "resourceLink": "",
+          "resourceLinks": []
         }
       ]
     },
@@ -215,6 +356,53 @@
               "url": "https://whyme-media-archive.vercel.app/resources/game-minimum-checklist"
             }
           ]
+        },
+        {
+          "title": "뉴비(초보)가 되어 아이의 세계 들어가기 [역할 전환 교육]",
+          "dialogue": [
+            {
+              "speaker": "parent",
+              "text": "엄마가 생각해봤는데, 사실 네가 하는 게임 하나도 모르겠더라. 엄마도 해보고 싶은데 네가 좀 알려줄래?"
+            },
+            {
+              "speaker": "child",
+              "text": "진짜 할 거야?"
+            },
+            {
+              "speaker": "parent",
+              "text": "응. 근데 엄마는 완전 초보라서 뭘 눌러야 하는지도 모르겠어. 스승님 도움이 필요할 것 같은데?"
+            },
+            {
+              "speaker": "child",
+              "text": "알겠음. 내가 알려줄게!"
+            },
+            {
+              "speaker": "parent",
+              "text": "근데 해보니까 생각보다 어렵네. 채팅창 보니까 말도 좀 세고... 엄마는 괜히 무섭던데?"
+            },
+            {
+              "speaker": "child",
+              "text": "엄마, 저런 애들 많아. 그냥 무시해. 내가 채팅 끄는 법 알려줄게."
+            },
+            {
+              "speaker": "parent",
+              "text": "오, 그런 것도 되는구나. 엄마는 그것도 몰랐네."
+            },
+            {
+              "speaker": "parent",
+              "text": "그리고 엄마가 직접 해보니까 왜 밥 먹으라고 해도 바로 못 나오는지 조금 알겠다. 안 나오는 게 아니라 못 나오는 상황도 있구나."
+            },
+            {
+              "speaker": "child",
+              "text": "맞아. 중간에 나가면 팀원들한테 피해 가는 게임도 많음."
+            },
+            {
+              "speaker": "parent",
+              "text": "그러네. 엄마는 네 게임을 이해하게 되고, 너는 엄마를 도와주고. 가끔 이렇게 같은 팀 해보는 것도 괜찮겠다."
+            }
+          ],
+          "resourceLink": "",
+          "resourceLinks": []
         }
       ]
     }

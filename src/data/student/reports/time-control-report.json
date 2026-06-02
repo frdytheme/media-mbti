@@ -1,0 +1,43 @@
+{
+  "categoryId": "time_control",
+  "categoryName": "사용시간 조절력",
+  "audience": "student",
+  "ranges": [
+    {
+      "min": 85,
+      "max": 100,
+      "level": "stable",
+      "title": "학생용 1구간 리포트 제목을 입력해주세요.",
+      "description": "학생용 1구간 리포트 설명을 입력해주세요.",
+      "watchPoint": "학생이 바로 해볼 수 있는 실천 포인트를 입력해주세요.",
+      "conversationExamples": []
+    },
+    {
+      "min": 70,
+      "max": 84,
+      "level": "watch",
+      "title": "학생용 2구간 리포트 제목을 입력해주세요.",
+      "description": "학생용 2구간 리포트 설명을 입력해주세요.",
+      "watchPoint": "학생이 스스로 점검할 포인트를 입력해주세요.",
+      "conversationExamples": []
+    },
+    {
+      "min": 50,
+      "max": 69,
+      "level": "adjustment",
+      "title": "학생용 3구간 리포트 제목을 입력해주세요.",
+      "description": "학생용 3구간 리포트 설명을 입력해주세요.",
+      "watchPoint": "조절을 다시 시작하기 위한 작은 실천을 입력해주세요.",
+      "conversationExamples": []
+    },
+    {
+      "min": 0,
+      "max": 49,
+      "level": "priority",
+      "title": "학생용 4구간 리포트 제목을 입력해주세요.",
+      "description": "학생용 4구간 리포트 설명을 입력해주세요.",
+      "watchPoint": "도움이 필요한 신호와 회복 방법을 입력해주세요.",
+      "conversationExamples": []
+    }
+  ]
+}

@@ -51,7 +51,7 @@
     "id": "judgment_05",
     "order": 5,
     "categoryId": "digital_judgment",
-    "question": "자녀가 온라인에서 본 자극적인 영상이나 이야기를 별다른 의심 없이 실제라고 믿는 경우가 있나요?",
+    "question": "자녀가 온라인에서 본 자극적인 정보나 유튜버의 의견을 별다른 의심 없이 실제라고 믿는 경우가 있나요?",
     "options": [
       { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
       { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },

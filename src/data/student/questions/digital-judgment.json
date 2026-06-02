@@ -1,0 +1,74 @@
+[
+  {
+    "id": "judgment_01",
+    "order": 1,
+    "categoryId": "digital_judgment",
+    "question": "유튜브나 SNS에서 본 내용을 그대로 믿을 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인에서 본 내용을 거의 그대로 믿는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "judgment_02",
+    "order": 2,
+    "categoryId": "digital_judgment",
+    "question": "조회수나 좋아요가 많으면 더 믿을 만한 정보라고 느껴질 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "조회수나 반응 수를 중요한 판단 기준으로 생각하는 편이다",
+        "scoreDelta": -15
+      }
+    ]
+  },
+  {
+    "id": "judgment_03",
+    "order": 3,
+    "categoryId": "digital_judgment",
+    "question": "유튜버가 추천하거나, \"요즘 유행이래\"라는 친구들 말에 갖고 싶거나 해보고 싶다는 생각이 들 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "유행이나 추천만으로 관심이 쉽게 생기는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "judgment_04",
+    "order": 4,
+    "categoryId": "digital_judgment",
+    "question": "재미있다면 다른 사람을 놀리고 욕하거나 무례하게 행동하는 콘텐츠도 괜찮다고 느껴질 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "재미있으면 문제될 수 있는 행동도 괜찮다고 생각하는 편이다",
+        "scoreDelta": -15
+      }
+    ]
+  },
+  {
+    "id": "judgment_05",
+    "order": 5,
+    "categoryId": "digital_judgment",
+    "question": "추천 영상이 나오면 그냥 계속 보는 편이다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      {
+        "id": "d",
+        "label": "추천되는 콘텐츠를 별다른 생각 없이 계속 보는 편이다",
+        "scoreDelta": -15
+      }
+    ]
+  }
+]

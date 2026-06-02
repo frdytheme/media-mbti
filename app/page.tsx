@@ -145,19 +145,42 @@ export default function Home() {
             <p className="mb-4 text-center text-sm font-semibold text-zinc-500 dark:text-zinc-400">
               개발 확인용 리포트 바로보기
             </p>
-            <div className="mb-3 flex justify-center">
+            <div className="mb-3 flex flex-wrap justify-center gap-2">
               <Link
                 href="/result?preview=1"
                 className="inline-flex h-10 cursor-pointer items-center justify-center rounded-md border border-zinc-300 px-4 text-sm font-semibold text-zinc-600 transition hover:-translate-y-0.5 hover:border-zinc-500 hover:bg-white hover:shadow-sm active:translate-y-0 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500 dark:hover:bg-zinc-900"
               >
-                진단 결과 바로보기(임시)
+                학부모용 결과 바로보기(임시)
+              </Link>
+              <Link
+                href="/result?preview=1&audience=student"
+                className="inline-flex h-10 cursor-pointer items-center justify-center rounded-md border border-emerald-300 px-4 text-sm font-semibold text-emerald-700 transition hover:-translate-y-0.5 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-sm active:translate-y-0 dark:border-emerald-800 dark:text-emerald-200 dark:hover:border-emerald-500 dark:hover:bg-emerald-950"
+              >
+                학생용 결과 바로보기(임시)
               </Link>
             </div>
+            <p className="mb-2 text-center text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+              학부모용 구간 미리보기
+            </p>
             <div className="grid gap-2 sm:grid-cols-4">
               {REPORT_RANGES.map((range) => (
                 <Link
                   key={range.id}
                   href={`/result?preview=1&range=${range.id}`}
+                  className={`inline-flex min-h-12 items-center justify-center rounded-md border px-3 text-sm font-bold shadow-sm transition hover:-translate-y-0.5 active:translate-y-0 ${range.className}`}
+                >
+                  {range.label}
+                </Link>
+              ))}
+            </div>
+            <p className="mb-2 mt-4 text-center text-xs font-semibold text-zinc-400 dark:text-zinc-500">
+              학생용 구간 미리보기
+            </p>
+            <div className="grid gap-2 sm:grid-cols-4">
+              {REPORT_RANGES.map((range) => (
+                <Link
+                  key={`student-${range.id}`}
+                  href={`/result?preview=1&audience=student&range=${range.id}`}
                   className={`inline-flex min-h-12 items-center justify-center rounded-md border px-3 text-sm font-bold shadow-sm transition hover:-translate-y-0.5 active:translate-y-0 ${range.className}`}
                 >
                   {range.label}

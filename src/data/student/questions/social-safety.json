@@ -1,0 +1,122 @@
+[
+  {
+    "id": "social_01",
+    "order": 1,
+    "categoryId": "social_safety",
+    "question": "나는 온라인에서 알게 된 사람과 개인적으로 연락하거나 대화를 이어갈 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인에서 알게 된 사람들과 계속 연락하는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_02",
+    "order": 2,
+    "categoryId": "social_safety",
+    "question": "친구들이 다 쓰는 SNS나 채팅 앱이면 나도 따라 쓰게 될 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      { "id": "d", "label": "친구 관계 때문에 거의 따라 쓰는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_03",
+    "order": 3,
+    "categoryId": "social_safety",
+    "question": "온라인 대화나 SNS 반응(좋아요, 댓글 등)에 따라 기분이 크게 달라질 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인 반응에 따라 기분 변화가 매우 큰 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_04",
+    "order": 4,
+    "categoryId": "social_safety",
+    "question": "온라인 대화나 SNS 화면을 가족이 볼까 봐 급하게 숨기거나 예민해질 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "화면을 숨기거나 예민해지는 일이 자주 반복된다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_05",
+    "order": 5,
+    "categoryId": "social_safety",
+    "question": "온라인에서 알게 된 사람을 실제로 만나보고 싶다고 생각한 적이 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그런 생각을 한다", "scoreDelta": -10 },
+      { "id": "d", "label": "온라인 관계를 실제 만남으로 이어가고 싶은 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_06",
+    "order": 6,
+    "categoryId": "social_safety",
+    "question": "단체 채팅방이나 SNS에서 친구를 놀리는 말, 캡처, 사진, 영상에 반응한 적이 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "문제가 될 수 있는 내용도 장난처럼 자주 반응하는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_07",
+    "order": 7,
+    "categoryId": "social_safety",
+    "question": "친구 관계 때문에 단체 채팅방이나 SNS 분위기에서 빠지기 어렵다고 느낄 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      { "id": "d", "label": "소외될까 봐 대부분 분위기에 맞추는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_08",
+    "order": 8,
+    "categoryId": "social_safety",
+    "question": "온라인에서 본 놀림, 밈, 캡처, 영상을 ‘그냥 장난’이라고 가볍게 생각할 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "문제가 될 수 있는 상황도 가볍게 넘기는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_09",
+    "order": 9,
+    "categoryId": "social_safety",
+    "question": "단체 채팅방이나 SNS 알림이 오면 바로 확인하거나 반응해야 할 것 같은 압박을 느낄 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 없다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 있다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 있다", "scoreDelta": -10 },
+      { "id": "d", "label": "알림이나 단톡 분위기에 매우 민감하게 반응하는 편이다", "scoreDelta": -15 }
+    ]
+  },
+  {
+    "id": "social_10",
+    "order": 10,
+    "categoryId": "social_safety",
+    "question": "온라인에서 불편한 상황이 생겨도 ‘싫어’, ‘그만해’, ‘원하지 않아’라고 말하기 어려울 때가 있다.",
+    "options": [
+      { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
+      { "id": "b", "label": "가끔 그렇다", "scoreDelta": -5 },
+      { "id": "c", "label": "자주 그렇다", "scoreDelta": -10 },
+      { "id": "d", "label": "불편해도 거절하거나 멈춰달라고 말하기 매우 어렵다", "scoreDelta": -15 }
+    ]
+  }
+]

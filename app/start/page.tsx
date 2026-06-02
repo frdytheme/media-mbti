@@ -18,7 +18,7 @@ export default function StartPage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <Link
-            href="/test?restart=1"
+            href="/test?audience=parent&restart=1"
             className="flex min-h-36 cursor-pointer flex-col justify-between rounded-lg border border-blue-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md active:translate-y-0 dark:border-blue-900 dark:bg-zinc-900 dark:hover:bg-blue-950"
           >
             <span className="text-xl font-bold text-zinc-950 dark:text-zinc-50">
@@ -29,18 +29,17 @@ export default function StartPage() {
             </span>
           </Link>
 
-          <button
-            type="button"
-            disabled
-            className="flex min-h-36 cursor-not-allowed flex-col justify-between rounded-lg border border-zinc-200 bg-zinc-100 p-5 text-left opacity-55 dark:border-zinc-800 dark:bg-zinc-900"
+          <Link
+            href="/test?audience=student&restart=1"
+            className="flex min-h-36 cursor-pointer flex-col justify-between rounded-lg border border-emerald-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-500 hover:bg-emerald-50 hover:shadow-md active:translate-y-0 dark:border-emerald-900 dark:bg-zinc-900 dark:hover:bg-emerald-950"
           >
-            <span className="text-xl font-bold text-zinc-500 dark:text-zinc-400">
+            <span className="text-xl font-bold text-zinc-950 dark:text-zinc-50">
               학생용
             </span>
-            <span className="mt-4 text-sm leading-6 text-zinc-500 dark:text-zinc-500">
-              준비 중입니다.
+            <span className="mt-4 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+              학생이 자신의 미디어 사용 경험을 바탕으로 직접 응답합니다.
             </span>
-          </button>
+          </Link>
         </div>
       </section>
     </main>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { type MouseEvent, useEffect, useRef, useState } from "react";
 
@@ -13,10 +14,18 @@ import familyCommunicationReport from "../../src/data/reports/family-communicati
 import gameSpendingReport from "../../src/data/reports/game-spending-report.json";
 import socialSafetyReport from "../../src/data/reports/social-safety-report.json";
 import timeControlReport from "../../src/data/reports/time-control-report.json";
+import studentContentQualityReport from "../../src/data/student/reports/content-quality-report.json";
+import studentDigitalJudgmentReport from "../../src/data/student/reports/digital-judgment-report.json";
+import studentFamilyCommunicationReport from "../../src/data/student/reports/family-communication-report.json";
+import studentGameSpendingReport from "../../src/data/student/reports/game-spending-report.json";
+import studentSocialSafetyReport from "../../src/data/student/reports/social-safety-report.json";
+import studentTimeControlReport from "../../src/data/student/reports/time-control-report.json";
 import { calculateCategoryScores } from "../../src/lib/scoring";
 import {
-  TEST_ANSWERS_STORAGE_KEY,
+  getTestAnswersStorageKey,
+  getTestAudience,
   type StoredAnswer,
+  type TestAudience,
 } from "../../src/lib/questions";
 
 type Category = {
@@ -63,6 +72,7 @@ type ReportRange = {
 type CategoryReport = {
   categoryId: string;
   categoryName: string;
+  audience?: TestAudience;
   ranges: ReportRange[];
 };
 
@@ -75,13 +85,22 @@ const PREVIEW_SCORES: Record<string, number> = {
   family_communication: 86,
 };
 
-const AVAILABLE_REPORTS = [
+const PARENT_REPORTS = [
   timeControlReport as CategoryReport,
   contentQualityReport as CategoryReport,
   socialSafetyReport as CategoryReport,
   gameSpendingReport as CategoryReport,
   digitalJudgmentReport as CategoryReport,
   familyCommunicationReport as CategoryReport,
+];
+
+const STUDENT_REPORTS = [
+  studentTimeControlReport as CategoryReport,
+  studentContentQualityReport as CategoryReport,
+  studentSocialSafetyReport as CategoryReport,
+  studentGameSpendingReport as CategoryReport,
+  studentDigitalJudgmentReport as CategoryReport,
+  studentFamilyCommunicationReport as CategoryReport,
 ];
 
 const TEST_RANGE_SCORES: Record<string, number> = {
@@ -92,6 +111,10 @@ const TEST_RANGE_SCORES: Record<string, number> = {
 };
 
 const LEAVE_RESULT_MESSAGE = "결과 페이지에서 나가시겠습니까?";
+const WMQI_CONTENT_EVALUATION_SHEET_PATH =
+  "/images/reports/content-quality/wmqi-content-evaluation-sheet.webp";
+const WMQI_CONTENT_EVALUATION_SHEET_SOURCE_PATH =
+  "wmqi-content-evaluation-sheet";
 
 function buildPreviewScores(categoryId?: string | null, range?: string | null) {
   if (!categoryId || !range || !TEST_RANGE_SCORES[range]) {
@@ -113,12 +136,20 @@ function buildPreviewScores(categoryId?: string | null, range?: string | null) {
   };
 }
 
-function loadStoredAnswers(): StoredAnswer[] {
+function loadStoredAnswers(audience: TestAudience): StoredAnswer[] {
   if (typeof window === "undefined") {
     return [];
   }
 
-  const storedValue = window.localStorage.getItem(TEST_ANSWERS_STORAGE_KEY);
+  let storedValue: string | null = null;
+
+  try {
+    storedValue = window.localStorage.getItem(
+      getTestAnswersStorageKey(audience),
+    );
+  } catch {
+    return [];
+  }
 
   if (!storedValue) {
     return [];
@@ -141,17 +172,23 @@ function getSpeakerLabel(speaker: ConversationLine["speaker"]) {
   return speaker === "parent" ? "부모" : "아이";
 }
 
+function isWmqiContentEvaluationSheetLink(href: string) {
+  return href.includes(WMQI_CONTENT_EVALUATION_SHEET_SOURCE_PATH);
+}
+
 function getResourceLinks(example: ConversationExample) {
   const resourceLinks = example.resourceLinks ?? [];
   const normalizedLinks = resourceLinks
     .map((link, index) => {
       if (typeof link === "string") {
-        return link ? { href: link, label: `자료 ${index + 1}` } : null;
+        return link && !isWmqiContentEvaluationSheetLink(link)
+          ? { href: link, label: `자료 ${index + 1}` }
+          : null;
       }
 
       const href = link.url || link.href || link.link;
 
-      if (!href) {
+      if (!href || isWmqiContentEvaluationSheetLink(href)) {
         return null;
       }
 
@@ -168,7 +205,9 @@ function getResourceLinks(example: ConversationExample) {
   }
 
   return example.resourceLink
-    ? [{ href: example.resourceLink, label: "자료 보기" }]
+    ? isWmqiContentEvaluationSheetLink(example.resourceLink)
+      ? []
+      : [{ href: example.resourceLink, label: "자료 보기" }]
     : [];
 }
 
@@ -233,9 +272,13 @@ export default function ResultPage() {
   const hasNavigationGuard = useRef(false);
   const allowNavigation = useRef(false);
   const [answers, setAnswers] = useState<StoredAnswer[]>([]);
+  const [audience, setAudience] = useState<TestAudience>("parent");
   const [isPreview, setIsPreview] = useState(false);
+  const [isWmqiImageOpen, setIsWmqiImageOpen] = useState(false);
   const [previewScores, setPreviewScores] = useState(PREVIEW_SCORES);
   const categoryIds = (categories as Category[]).map((category) => category.id);
+  const availableReports =
+    audience === "student" ? STUDENT_REPORTS : PARENT_REPORTS;
   const hasStoredAnswers = answers.length > 0;
   const shouldShowResult = hasStoredAnswers || isPreview;
   const scores = isPreview
@@ -250,6 +293,8 @@ export default function ResultPage() {
   useEffect(() => {
     queueMicrotask(() => {
       const searchParams = new URLSearchParams(window.location.search);
+      const nextAudience = getTestAudience(searchParams.get("audience"));
+      setAudience(nextAudience);
       setIsPreview(searchParams.get("preview") === "1");
       setPreviewScores(
         buildPreviewScores(
@@ -257,7 +302,7 @@ export default function ResultPage() {
           searchParams.get("range"),
         ),
       );
-      setAnswers(loadStoredAnswers());
+      setAnswers(loadStoredAnswers(nextAudience));
     });
   }, []);
 
@@ -299,6 +344,28 @@ export default function ResultPage() {
     };
   }, [router]);
 
+  useEffect(() => {
+    if (!isWmqiImageOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsWmqiImageOpen(false);
+      }
+    }
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isWmqiImageOpen]);
+
   function confirmResultNavigation(event?: MouseEvent<HTMLAnchorElement>) {
     if (!window.confirm(LEAVE_RESULT_MESSAGE)) {
       event?.preventDefault();
@@ -317,15 +384,74 @@ export default function ResultPage() {
     router.push("/");
   }
 
+  function openWmqiImage() {
+    setIsWmqiImageOpen(true);
+  }
+
+  function closeWmqiImage() {
+    setIsWmqiImageOpen(false);
+  }
+
   return (
     <main className="min-h-screen bg-zinc-50 px-4 py-8 text-zinc-950 sm:px-6 dark:bg-zinc-950 dark:text-zinc-50">
       <HomeNavigation onNavigate={confirmResultNavigation} />
+      {isWmqiImageOpen ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="WMQI 콘텐츠 평가표 크게 보기"
+          className="fixed inset-0 z-[100] flex bg-zinc-950/80 p-3 sm:p-6"
+        >
+          <div className="flex min-h-0 w-full flex-col overflow-hidden rounded-lg bg-white shadow-2xl dark:bg-zinc-950">
+            <div className="flex shrink-0 items-center justify-between gap-3 border-b border-zinc-200 px-4 py-3 dark:border-zinc-800">
+              <p className="min-w-0 truncate text-sm font-bold text-zinc-950 dark:text-zinc-50">
+                WMQI 콘텐츠 평가표
+              </p>
+              <div className="flex shrink-0 items-center gap-2">
+                <a
+                  href={WMQI_CONTENT_EVALUATION_SHEET_PATH}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-9 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-semibold text-zinc-700 transition hover:border-zinc-500 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-900"
+                >
+                  원본 크게 보기
+                </a>
+                <button
+                  type="button"
+                  onClick={closeWmqiImage}
+                  className="inline-flex h-9 items-center justify-center rounded-md bg-zinc-950 px-3 text-xs font-semibold text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+                >
+                  닫기
+                </button>
+              </div>
+            </div>
+            <div className="min-h-0 flex-1 overflow-auto bg-zinc-100 p-3 dark:bg-zinc-900 sm:p-6">
+              <div className="w-[960px] max-w-none sm:mx-auto sm:w-[1280px]">
+                <Image
+                  src={WMQI_CONTENT_EVALUATION_SHEET_PATH}
+                  alt="WMQI 콘텐츠 평가표"
+                  width={1920}
+                  height={1080}
+                  sizes="(max-width: 768px) 100vw, 1280px"
+                  className="h-auto w-full rounded-md bg-white shadow-lg"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
         <header className="flex flex-col gap-2">
           <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
             Media MBTI Result
           </p>
           <h1 className="text-2xl font-bold sm:text-3xl">진단 결과</h1>
+          {audience === "student" ? (
+            <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+              학생용 리포트
+            </p>
+          ) : null}
         </header>
 
         {!shouldShowResult ? (
@@ -334,7 +460,11 @@ export default function ResultPage() {
               저장된 응답이 없습니다. 테스트를 먼저 진행해주세요.
             </p>
             <Link
-              href="/test?restart=1"
+              href={
+                audience === "student"
+                  ? "/test?audience=student&restart=1"
+                  : "/test?restart=1"
+              }
               className="mt-5 inline-flex h-11 cursor-pointer items-center rounded-md bg-blue-600 px-5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md active:translate-y-0 active:bg-blue-800"
             >
               테스트 시작
@@ -368,7 +498,7 @@ export default function ResultPage() {
                 항목별 리포트
               </h2>
 
-              {AVAILABLE_REPORTS.map((report) => {
+              {availableReports.map((report) => {
                 const score = scores[report.categoryId] ?? 0;
                 const matchedRange = findReportRange(report, score);
 
@@ -407,6 +537,62 @@ export default function ResultPage() {
                         <ReportText text={matchedRange.watchPoint} />
                       </div>
                     </div>
+
+                    {report.categoryId === "content_quality" ? (
+                      <figure className="mt-5 overflow-hidden rounded-md border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
+                        <button
+                          type="button"
+                          onClick={openWmqiImage}
+                          className="group hidden w-full cursor-zoom-in bg-white text-left sm:block dark:bg-zinc-950"
+                          aria-label="WMQI 콘텐츠 평가표 크게 보기"
+                        >
+                          <Image
+                            src={WMQI_CONTENT_EVALUATION_SHEET_PATH}
+                            alt="WMQI 콘텐츠 평가표"
+                            width={1920}
+                            height={1080}
+                            sizes="(max-width: 768px) calc(100vw - 40px), 720px"
+                            className="h-auto w-full transition group-hover:opacity-90"
+                          />
+                        </button>
+                        <a
+                          href={WMQI_CONTENT_EVALUATION_SHEET_PATH}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block bg-white dark:bg-zinc-950 sm:hidden"
+                          aria-label="WMQI 콘텐츠 평가표 원본 보기"
+                        >
+                          <Image
+                            src={WMQI_CONTENT_EVALUATION_SHEET_PATH}
+                            alt="WMQI 콘텐츠 평가표"
+                            width={1920}
+                            height={1080}
+                            sizes="calc(100vw - 40px)"
+                            className="h-auto w-full"
+                          />
+                        </a>
+                        <figcaption className="flex flex-col gap-3 border-t border-zinc-200 px-4 py-3 text-xs font-medium text-zinc-500 dark:border-zinc-800 dark:text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
+                          <span>WMQI 콘텐츠 평가표</span>
+                          <div className="flex flex-wrap gap-2">
+                            <button
+                              type="button"
+                              onClick={openWmqiImage}
+                              className="hidden h-9 items-center justify-center rounded-md bg-blue-600 px-3 text-xs font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md active:translate-y-0 sm:inline-flex"
+                            >
+                              크게 보기
+                            </button>
+                            <a
+                              href={WMQI_CONTENT_EVALUATION_SHEET_PATH}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex h-9 items-center justify-center rounded-md border border-zinc-300 px-3 text-xs font-semibold text-zinc-700 transition hover:-translate-y-0.5 hover:border-zinc-500 hover:bg-white hover:shadow-sm active:translate-y-0 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-900"
+                            >
+                              원본 크게 보기
+                            </a>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    ) : null}
 
                     {matchedRange.conversationExamples?.length ? (
                       <div className="mt-5 flex flex-col gap-3">
@@ -467,7 +653,7 @@ export default function ResultPage() {
                 뒤로가기
               </button>
               <Link
-                href="/test"
+                href={audience === "student" ? "/test?audience=student" : "/test"}
                 onClick={confirmResultNavigation}
                 className="inline-flex h-11 cursor-pointer items-center rounded-md border border-zinc-300 px-5 text-sm font-semibold text-zinc-700 transition hover:-translate-y-0.5 hover:border-zinc-500 hover:bg-white hover:shadow-sm active:translate-y-0 dark:border-zinc-700 dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:bg-zinc-900"
               >

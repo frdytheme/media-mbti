@@ -135,7 +135,7 @@
     "id": "social_10",
     "order": 10,
     "categoryId": "social_safety",
-    "question": "온라인에서 불편한 상황이 있었을 때, ‘싫다’거나 ‘그만하고 싶다’는 표현을 어려워하는 모습이 보이나요?",
+    "question": "온라인에서 불편한 상황이 있었을 때, ‘싫다’거나 ‘원치 않는다’는 표현을 어려워하는 모습이 보이나요?",
     "options": [
       { "id": "a", "label": "거의 그렇지 않다", "scoreDelta": 0 },
       { "id": "b", "label": "가끔 어려워한다", "scoreDelta": -5 },

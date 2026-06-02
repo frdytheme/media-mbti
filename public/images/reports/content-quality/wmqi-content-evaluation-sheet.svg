@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="2036" viewBox="0 0 1440 2036" role="img" aria-labelledby="title desc">
+  <title id="title">WMQI 콘텐츠 평가표 더미 이미지</title>
+  <desc id="desc">실제 WMQI 콘텐츠 평가표 이미지로 교체하기 위한 자리 표시자입니다.</desc>
+  <rect width="1440" height="2036" fill="#f8fafc"/>
+  <rect x="80" y="80" width="1280" height="1876" rx="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="4"/>
+  <text x="720" y="250" fill="#0f172a" font-family="Arial, sans-serif" font-size="72" font-weight="700" text-anchor="middle">
+    WMQI 콘텐츠 평가표
+  </text>
+  <text x="720" y="350" fill="#475569" font-family="Arial, sans-serif" font-size="36" text-anchor="middle">
+    실제 기준표 이미지로 이 파일을 교체해주세요.
+  </text>
+  <rect x="180" y="500" width="1080" height="128" rx="12" fill="#dbeafe"/>
+  <text x="220" y="582" fill="#1e3a8a" font-family="Arial, sans-serif" font-size="40" font-weight="700">
+    권장 이미지 크기: 1440 x 2036px
+  </text>
+  <rect x="180" y="700" width="1080" height="160" rx="12" fill="#f1f5f9"/>
+  <rect x="180" y="900" width="1080" height="160" rx="12" fill="#f1f5f9"/>
+  <rect x="180" y="1100" width="1080" height="160" rx="12" fill="#f1f5f9"/>
+  <rect x="180" y="1300" width="1080" height="160" rx="12" fill="#f1f5f9"/>
+  <rect x="180" y="1500" width="1080" height="160" rx="12" fill="#f1f5f9"/>
+  <text x="220" y="795" fill="#64748b" font-family="Arial, sans-serif" font-size="34">
+    친사회성 / 정서표현과 조절 / 폭력성
+  </text>
+  <text x="220" y="995" fill="#64748b" font-family="Arial, sans-serif" font-size="34">
+    선정성 / 윤리성 / 상업성 / 심층성
+  </text>
+  <text x="220" y="1195" fill="#64748b" font-family="Arial, sans-serif" font-size="34">
+    기준표 내용을 이 영역에 배치
+  </text>
+  <text x="220" y="1395" fill="#64748b" font-family="Arial, sans-serif" font-size="34">
+    모바일에서도 글자가 읽히도록 여백 유지
+  </text>
+  <text x="220" y="1595" fill="#64748b" font-family="Arial, sans-serif" font-size="34">
+    교체 후 같은 파일명을 유지하면 경로가 안정적입니다
+  </text>
+</svg>

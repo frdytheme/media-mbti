@@ -11,7 +11,7 @@ export default function HomeNavigation({ onNavigate }: HomeNavigationProps) {
       <Link
         href="/"
         onClick={onNavigate}
-        className="fixed left-4 top-4 z-50 rounded-md px-2 py-1 text-sm font-semibold text-zinc-500 transition hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 sm:left-6 sm:top-6 dark:text-zinc-400 dark:hover:text-blue-300 dark:focus:ring-blue-900"
+        className="fixed left-4 top-4 z-50 hidden rounded-md px-2 py-1 text-sm font-semibold text-zinc-500 transition hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-200 sm:left-6 sm:top-6 sm:block dark:text-zinc-400 dark:hover:text-blue-300 dark:focus:ring-blue-900"
       >
         홈으로
       </Link>
