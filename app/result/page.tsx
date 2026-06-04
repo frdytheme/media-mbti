@@ -214,27 +214,48 @@ function getResourceLinks(example: ConversationExample) {
 function splitReportParagraphs(text: string) {
   const sentences: string[] = [];
   let currentSentence = "";
-  let isInsideQuote = false;
+  const quoteStack: string[] = [];
 
   for (const character of text.replace(/\s+/g, " ").trim()) {
     currentSentence += character;
 
-    if (character === '"') {
-      isInsideQuote = !isInsideQuote;
+    if (character === '"' || character === "'") {
+      if (quoteStack.at(-1) === character) {
+        quoteStack.pop();
+      } else {
+        quoteStack.push(character);
+      }
       continue;
     }
 
     if (character === "“") {
-      isInsideQuote = true;
+      quoteStack.push("”");
       continue;
     }
 
     if (character === "”") {
-      isInsideQuote = false;
+      if (quoteStack.at(-1) === character) {
+        quoteStack.pop();
+      }
       continue;
     }
 
-    if (!isInsideQuote && [".", "?", "!", "。", "？", "！"].includes(character)) {
+    if (character === "‘") {
+      quoteStack.push("’");
+      continue;
+    }
+
+    if (character === "’") {
+      if (quoteStack.at(-1) === character) {
+        quoteStack.pop();
+      }
+      continue;
+    }
+
+    if (
+      quoteStack.length === 0 &&
+      [".", "?", "!", "。", "？", "！"].includes(character)
+    ) {
       sentences.push(currentSentence.trim());
       currentSentence = "";
     }
@@ -260,8 +281,10 @@ function splitReportParagraphs(text: string) {
 function ReportText({ text }: { text: string }) {
   return (
     <div className="space-y-3">
-      {splitReportParagraphs(text).map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+      {splitReportParagraphs(text).map((paragraph, index) => (
+        <p key={`${index}-${paragraph}`} className="break-keep text-pretty">
+          {paragraph}
+        </p>
       ))}
     </div>
   );
