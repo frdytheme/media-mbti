@@ -20,6 +20,16 @@ import studentFamilyCommunicationReport from "../../src/data/student/reports/fam
 import studentGameSpendingReport from "../../src/data/student/reports/game-spending-report.json";
 import studentSocialSafetyReport from "../../src/data/student/reports/social-safety-report.json";
 import studentTimeControlReport from "../../src/data/student/reports/time-control-report.json";
+import {
+  getGuideResourcesForCategory,
+  type GuideResource,
+} from "../../src/data/guide-resources";
+import {
+  mediaDomainLabels,
+  temperamentInsightCards,
+  temperamentInsightIntro,
+  type TemperamentInsightCard,
+} from "../../src/data/temperament-insights";
 import { calculateCategoryScores } from "../../src/lib/scoring";
 import {
   getTestAnswersStorageKey,
@@ -42,22 +52,8 @@ type ConversationLine = {
 
 type ConversationExample = {
   title: string;
-  resourceLink?: string;
-  resourceLinks?: ResourceLink[];
   dialogue: ConversationLine[];
 };
-
-type ResourceLink =
-  | string
-  | {
-      label?: string;
-      name?: string;
-      text?: string;
-      title?: string;
-      link?: string;
-      url?: string;
-      href?: string;
-    };
 
 type ReportRange = {
   min: number;
@@ -113,8 +109,6 @@ const TEST_RANGE_SCORES: Record<string, number> = {
 const LEAVE_RESULT_MESSAGE = "결과 페이지에서 나가시겠습니까?";
 const WMQI_CONTENT_EVALUATION_SHEET_PATH =
   "/images/reports/content-quality/wmqi-content-evaluation-sheet.webp";
-const WMQI_CONTENT_EVALUATION_SHEET_SOURCE_PATH =
-  "wmqi-content-evaluation-sheet";
 
 function buildPreviewScores(categoryId?: string | null, range?: string | null) {
   if (!categoryId || !range || !TEST_RANGE_SCORES[range]) {
@@ -170,45 +164,6 @@ function findReportRange(report: CategoryReport, score: number) {
 
 function getSpeakerLabel(speaker: ConversationLine["speaker"]) {
   return speaker === "parent" ? "부모" : "아이";
-}
-
-function isWmqiContentEvaluationSheetLink(href: string) {
-  return href.includes(WMQI_CONTENT_EVALUATION_SHEET_SOURCE_PATH);
-}
-
-function getResourceLinks(example: ConversationExample) {
-  const resourceLinks = example.resourceLinks ?? [];
-  const normalizedLinks = resourceLinks
-    .map((link, index) => {
-      if (typeof link === "string") {
-        return link && !isWmqiContentEvaluationSheetLink(link)
-          ? { href: link, label: `자료 ${index + 1}` }
-          : null;
-      }
-
-      const href = link.url || link.href || link.link;
-
-      if (!href || isWmqiContentEvaluationSheetLink(href)) {
-        return null;
-      }
-
-      return {
-        href,
-        label:
-          link.label || link.title || link.name || link.text || `자료 ${index + 1}`,
-      };
-    })
-    .filter((link): link is { href: string; label: string } => Boolean(link));
-
-  if (normalizedLinks.length > 0) {
-    return normalizedLinks;
-  }
-
-  return example.resourceLink
-    ? isWmqiContentEvaluationSheetLink(example.resourceLink)
-      ? []
-      : [{ href: example.resourceLink, label: "자료 보기" }]
-    : [];
 }
 
 function splitReportParagraphs(text: string) {
@@ -282,10 +237,203 @@ function ReportText({ text }: { text: string }) {
   return (
     <div className="space-y-3">
       {splitReportParagraphs(text).map((paragraph, index) => (
-        <p key={`${index}-${paragraph}`} className="break-keep text-pretty">
+        <p key={`${index}-${paragraph}`} className="text-left">
           {paragraph}
         </p>
       ))}
+    </div>
+  );
+}
+
+function GuideResourcesSection({ guides }: { guides: GuideResource[] }) {
+  const groupedGuides = guides.reduce<Record<string, GuideResource[]>>(
+    (groups, guide) => {
+      groups[guide.group] = [...(groups[guide.group] ?? []), guide];
+      return groups;
+    },
+    {},
+  );
+
+  return (
+    <details className="group mt-5 overflow-hidden rounded-md border border-blue-200 bg-blue-50/80 shadow-sm dark:border-blue-900 dark:bg-blue-950/50">
+      <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 border-l-4 border-blue-600 px-4 py-3 text-sm font-bold text-blue-950 marker:hidden transition hover:bg-blue-100/70 dark:border-blue-400 dark:text-blue-100 dark:hover:bg-blue-900/40">
+        <span className="flex min-w-0 flex-col gap-1">
+          <span>도움이 되는 가이드 자료</span>
+          <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">
+            이 유형에 맞는 자료 {guides.length}개
+          </span>
+        </span>
+        <span className="flex shrink-0 items-center gap-2 rounded-md bg-white px-2.5 py-1.5 text-xs font-bold text-blue-700 shadow-sm ring-1 ring-blue-100 dark:bg-blue-950 dark:text-blue-200 dark:ring-blue-800">
+          <span className="group-open:hidden">펼쳐보기</span>
+          <span className="hidden group-open:inline">접기</span>
+          <span
+            aria-hidden="true"
+            className="text-base transition-transform group-open:rotate-180"
+          >
+            ↓
+          </span>
+        </span>
+      </summary>
+
+      <div className="border-t border-blue-200 bg-white px-4 py-4 dark:border-blue-900 dark:bg-zinc-950">
+        <div className="flex flex-col gap-5">
+          {Object.entries(groupedGuides).map(([group, groupGuides]) => (
+            <section key={group}>
+              <h4 className="mb-2 text-xs font-bold text-zinc-500 dark:text-zinc-400">
+                {group}
+              </h4>
+              <ul className="divide-y divide-zinc-200 overflow-hidden rounded-md border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900">
+                {groupGuides.map((guide) => (
+                  <li key={guide.id}>
+                    <a
+                      href={guide.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex min-h-12 items-center gap-3 px-3 py-2.5 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-200 dark:hover:bg-blue-950 dark:focus:ring-blue-900"
+                    >
+                      <span className="shrink-0 rounded-sm bg-zinc-100 px-2 py-1 text-[11px] font-bold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                        {guide.type}
+                      </span>
+                      <span className="min-w-0 flex-1 text-sm font-medium leading-6 text-zinc-700 dark:text-zinc-200">
+                        {guide.title}
+                      </span>
+                      <span className="shrink-0 text-xs font-semibold text-blue-600 dark:text-blue-400">
+                        열기
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </div>
+    </details>
+  );
+}
+
+function TemperamentInsightSection() {
+  return (
+    <section className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <header className="flex flex-col gap-3">
+        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+          참고 자료
+        </p>
+        <h2 className="text-xl font-bold tracking-normal text-zinc-950 dark:text-zinc-50">
+          기질적 관점으로 보는 미디어 습관
+        </h2>
+        <ReportText text={temperamentInsightIntro} />
+      </header>
+
+      <div className="mt-5 grid gap-3">
+        {temperamentInsightCards.map((card) => (
+          <TemperamentInsightCardView key={card.id} card={card} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TemperamentInsightCardView({
+  card,
+}: {
+  card: TemperamentInsightCard;
+}) {
+  return (
+    <details className="group overflow-hidden rounded-md border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
+      <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 marker:hidden transition hover:bg-zinc-100 dark:hover:bg-zinc-900">
+        <span className="min-w-0">
+          <span className="block text-sm font-bold text-zinc-950 dark:text-zinc-50">
+            {card.title}
+          </span>
+          <span className="mt-1.5 inline-flex max-w-full rounded-md bg-blue-50 px-2 py-1 text-xs font-bold leading-5 text-blue-700 ring-1 ring-blue-100 dark:bg-blue-950 dark:text-blue-200 dark:ring-blue-900">
+            “{card.characterLabel}”
+          </span>
+        </span>
+        <span className="shrink-0 rounded-md bg-white px-2.5 py-1.5 text-xs font-bold text-zinc-600 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:text-zinc-300 dark:ring-zinc-800">
+          <span className="group-open:hidden">펼쳐보기</span>
+          <span className="hidden group-open:inline">접기</span>
+        </span>
+      </summary>
+
+      <div className="border-t border-zinc-200 bg-white px-4 py-4 dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="mt-4">
+          <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
+            함께 살펴볼 리포트 영역
+          </p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {card.relatedDomains.map((domainId) => (
+              <span
+                key={domainId}
+                className="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100 dark:bg-blue-950 dark:text-blue-200 dark:ring-blue-900"
+              >
+                {mediaDomainLabels[domainId]}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 grid gap-3">
+          <TemperamentBodyItem
+            label="이런 모습으로 보일 수 있어요"
+            text={card.body.childPattern}
+          />
+          <TemperamentBodyItem
+            label="이 힘은 자원이기도 해요"
+            text={card.body.strengthFrame}
+          />
+          <TemperamentBodyItem
+            label="다만 미디어 환경에서는"
+            text={card.body.mediaRisk}
+          />
+          <TemperamentBodyItem
+            label="이 영역을 함께 살펴보세요"
+            text={card.body.readingGuide}
+          />
+          <TemperamentBodyItem
+            label="이런 말이 더 잘 닿을 수 있어요"
+            text={card.body.parentApproach}
+          />
+        </div>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-md bg-zinc-50 p-3 dark:bg-zinc-950">
+            <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
+              살펴볼 지점
+            </p>
+            <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+              {card.watchPoint}
+            </p>
+          </div>
+          <div className="rounded-md bg-blue-50 p-3 dark:bg-blue-950">
+            <p className="text-xs font-bold text-blue-700 dark:text-blue-200">
+              부모 첫마디
+            </p>
+            <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+              {card.parentPhrase}
+            </p>
+          </div>
+        </div>
+      </div>
+    </details>
+  );
+}
+
+function TemperamentBodyItem({
+  label,
+  text,
+}: {
+  label: string;
+  text: string;
+}) {
+  return (
+    <div>
+      <p className="text-xs font-bold text-blue-700 dark:text-blue-300">
+        {label}
+      </p>
+      <div className="mt-1 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+        <ReportText text={text} />
+      </div>
     </div>
   );
 }
@@ -524,6 +672,7 @@ export default function ResultPage() {
               {availableReports.map((report) => {
                 const score = scores[report.categoryId] ?? 0;
                 const matchedRange = findReportRange(report, score);
+                const guides = getGuideResourcesForCategory(report.categoryId);
 
                 if (!matchedRange) {
                   return null;
@@ -643,29 +792,20 @@ export default function ResultPage() {
                                 </p>
                               ))}
                             </div>
-                            {getResourceLinks(example).length > 0 ? (
-                              <div className="mt-4 flex flex-wrap gap-2">
-                                {getResourceLinks(example).map((link) => (
-                                  <a
-                                    key={`${example.title}-${link.href}`}
-                                    href={link.href}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="inline-flex h-10 items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-md active:translate-y-0"
-                                  >
-                                    {link.label}
-                                  </a>
-                                ))}
-                              </div>
-                            ) : null}
                           </div>
                         ))}
                       </div>
+                    ) : null}
+
+                    {guides.length > 0 ? (
+                      <GuideResourcesSection guides={guides} />
                     ) : null}
                   </article>
                 );
               })}
             </section>
+
+            <TemperamentInsightSection />
 
             <div className="flex justify-end gap-2">
               <button

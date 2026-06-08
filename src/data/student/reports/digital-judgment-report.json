@@ -34,9 +34,7 @@
               "speaker": "parent",
               "text": "그게 중요한 거야. 조회수보다 네 생각을 먼저 꺼내보는 거."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": []
+          ]
         }
       ]
     },
@@ -78,17 +76,6 @@
             {
               "speaker": "parent",
               "text": "그럼 너무 자극적인 댓글은 조금 덜 보이게 설정해보는 것도 괜찮겠다."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "유튜브 제한 모드",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-restricted-mode"
-            },
-            {
-              "label": "인스타그램 '원치 않는 댓글 숨기기'",
-              "url": "https://whyme-media-archive.vercel.app/resources/instagram-comment-filter"
             }
           ]
         }
@@ -141,29 +128,6 @@
               "speaker": "parent",
               "text": "그럼 추천이 너무 많이 뜨는 건 잠깐 줄여보는 것도 괜찮겠다."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "유튜브 시청 기록 초기화",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-watch-history-reset"
-            },
-            {
-              "label": "유튜브 쇼츠 30일 숨기기",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-shorts-hide-30days"
-            },
-            {
-              "label": "유튜브 쇼츠 피드 제한",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-shorts-feed-limit"
-            },
-            {
-              "label": "유튜브 제한 모드",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-restricted-mode"
-            },
-            {
-              "label": "인스타그램 '원치 않는 댓글 숨기기'",
-              "url": "https://whyme-media-archive.vercel.app/resources/instagram-comment-filter"
-            }
           ]
         }
       ]
@@ -214,29 +178,6 @@
             {
               "speaker": "parent",
               "text": "그럼 잠깐은 쇼츠랑 추천영상 흐름을 줄이고 다시 시작해보는 것도 방법일 수 있겠다."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "유튜브 시청 기록 초기화",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-watch-history-reset"
-            },
-            {
-              "label": "유튜브 쇼츠 30일 숨기기",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-shorts-hide-30days"
-            },
-            {
-              "label": "유튜브 쇼츠 피드 제한",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-shorts-feed-limit"
-            },
-            {
-              "label": "유튜브 제한 모드",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-restricted-mode"
-            },
-            {
-              "label": "인스타그램 '원치 않는 댓글 숨기기'",
-              "url": "https://whyme-media-archive.vercel.app/resources/instagram-comment-filter"
             }
           ]
         }

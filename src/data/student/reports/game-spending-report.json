@@ -42,12 +42,6 @@
               "speaker": "child",
               "text": "그럼 우리 게임할 때 기준도 한번 같이 정해볼까?"
             }
-          ],
-          "resourceLinks": [
-            {
-              "label": "게임 최소 조건 체크리스트",
-              "url": "https://whyme-media-archive.vercel.app/resources/game-minimum-checklist"
-            }
           ]
         },
         {
@@ -81,9 +75,7 @@
               "speaker": "child",
               "text": "그러니까. 안 나오는 게 아니라 못 나오는 상황도 있음."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": []
+          ]
         }
       ]
     },
@@ -126,12 +118,6 @@
               "speaker": "child",
               "text": "그럼 그런 상황에서 어떻게 할지 기준을 한번 정해볼까?"
             }
-          ],
-          "resourceLinks": [
-            {
-              "label": "게임 최소 조건 체크리스트",
-              "url": "https://whyme-media-archive.vercel.app/resources/game-minimum-checklist"
-            }
           ]
         },
         {
@@ -165,9 +151,7 @@
               "speaker": "child",
               "text": "그러니까. 안 나오는 게 아니라 못 나오는 상황도 있음."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": []
+          ]
         }
       ]
     },
@@ -202,12 +186,6 @@
               "speaker": "child",
               "text": "나도 솔직히 조금은 바꿔야 할 것 같긴 해."
             }
-          ],
-          "resourceLinks": [
-            {
-              "label": "게임 최소 조건 체크리스트",
-              "url": "https://whyme-media-archive.vercel.app/resources/game-minimum-checklist"
-            }
           ]
         },
         {
@@ -241,9 +219,7 @@
               "speaker": "child",
               "text": "그러니까. 안 나오는 게 아니라 못 나오는 상황도 있음."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": []
+          ]
         }
       ]
     },
@@ -281,12 +257,6 @@
             {
               "speaker": "parent",
               "text": "그럼 이번엔 서로 싸우기보다 같은 팀으로 방법을 찾아보자."
-            }
-          ],
-          "resourceLinks": [
-            {
-              "label": "게임 최소 조건 체크리스트",
-              "url": "https://whyme-media-archive.vercel.app/resources/game-minimum-checklist"
             }
           ]
         }

@@ -33,9 +33,7 @@
               "speaker": "parent",
               "text": "엄마는 네가 무조건 안 믿는 사람보다, ‘왜 이렇게 반응이 많지?’ 한 번 더 생각해보는 사람이 되는 게 더 중요한 것 같아."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": []
+          ]
         }
       ]
     },
@@ -69,17 +67,6 @@
             {
               "speaker": "parent",
               "text": "그럼 우리 너무 자극적인 댓글이나 반응은 조금 덜 보이게 설정해볼까? 유튜브 제한모드랑 인스타에서 원치 않는 댓글 더 많이 숨기는 설정 같이 보면 좋을 것 같아."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "유튜브 제한 모드",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-restricted-mode"
-            },
-            {
-              "label": "인스타그램 '원치 않는 댓글 숨기기'",
-              "url": "https://whyme-media-archive.vercel.app/resources/instagram-comment-filter"
             }
           ]
         }
@@ -124,29 +111,6 @@
               "speaker": "parent",
               "text": "응. 특히 너희 나이대는 뇌 발달이 중요한 시기라 더 영향이 클 수 있다더라. 우리 쇼츠나 추천영상 조금 덜 뜨게 하는 설정이랑, 유튜브 제한모드·인스타 댓글 숨김 설정도 같이 한번 볼까?"
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "유튜브 시청 기록 초기화",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-watch-history-reset"
-            },
-            {
-              "label": "유튜브 쇼츠 30일 숨기기",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-shorts-hide-30days"
-            },
-            {
-              "label": "유튜브 쇼츠 피드 제한",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-shorts-feed-limit"
-            },
-            {
-              "label": "유튜브 제한 모드",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-restricted-mode"
-            },
-            {
-              "label": "인스타그램 '원치 않는 댓글 숨기기'",
-              "url": "https://whyme-media-archive.vercel.app/resources/instagram-comment-filter"
-            }
           ]
         }
       ]
@@ -189,29 +153,6 @@
             {
               "speaker": "parent",
               "text": "그래서 당분간은 쇼츠나 추천영상 흐름을 좀 줄이고, 자극적인 댓글도 덜 보이게 해보면 좋겠어. 우리 유튜브 제한모드랑 인스타 댓글 숨김 설정까지 같이 한번 해보자."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "유튜브 시청 기록 초기화",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-watch-history-reset"
-            },
-            {
-              "label": "유튜브 쇼츠 30일 숨기기",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-shorts-hide-30days"
-            },
-            {
-              "label": "유튜브 쇼츠 피드 제한",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-shorts-feed-limit"
-            },
-            {
-              "label": "유튜브 제한 모드",
-              "url": "https://whyme-media-archive.vercel.app/resources/youtube-restricted-mode"
-            },
-            {
-              "label": "인스타그램 '원치 않는 댓글 숨기기'",
-              "url": "https://whyme-media-archive.vercel.app/resources/instagram-comment-filter"
             }
           ]
         }

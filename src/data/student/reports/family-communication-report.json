@@ -34,9 +34,7 @@
               "speaker": "child",
               "text": "응. 그냥 사람들이 다 본다고 다 맞는 건 아닌 것 같아."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": []
+          ]
         }
       ]
     },
@@ -70,13 +68,6 @@
             {
               "speaker": "child",
               "text": "그래서 우리 서로 괜찮은 기준을 같이 정해보면 좋을 것 같아."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "미디어 협약서",
-              "url": "https://whyme-media-archive.vercel.app/resources/family-media-rule-contract"
             }
           ]
         }
@@ -112,13 +103,6 @@
             {
               "speaker": "child",
               "text": "어디까지는 괜찮고 어디부터는 불편한지 같이 정해보면 좋겠어."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "미디어 협약서",
-              "url": "https://whyme-media-archive.vercel.app/resources/family-media-rule-contract"
             }
           ]
         }
@@ -158,13 +142,6 @@
             {
               "speaker": "parent",
               "text": "좋아. 그럼 이번에는 같이 기준을 만들어보자."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "미디어 협약서",
-              "url": "https://whyme-media-archive.vercel.app/resources/family-media-rule-contract"
             }
           ]
         }

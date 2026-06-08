@@ -34,13 +34,6 @@
               "speaker": "parent",
               "text": "맞아. 그래서 엄마는 화났을 때 바로 뭐라고 하기보다, 우리 미리 기준 같은 걸 같이 정해두면 어떨까 생각했어."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "미디어 협약서",
-              "url": "https://whyme-media-archive.vercel.app/resources/family-media-rule-contract"
-            }
           ]
         }
       ]
@@ -76,9 +69,7 @@
               "speaker": "parent",
               "text": "그럴 수도 있겠다. 엄마도 주변 사람들이 다 이야기하면 괜히 더 궁금하고 뒤처지는 느낌 들 것 같아. 넌 어떤 순간에 제일 그렇게 느껴졌어?"
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": []
+          ]
         },
         {
           "title": "감정 대신 기준 다시 세우기",
@@ -102,13 +93,6 @@
             {
               "speaker": "parent",
               "text": "혼내려고 만들기보다, 서로 덜 지치고 필요한 순간 이야기하기 편해지려고. 우리 둘 다 너무 감정적으로 안 가려고 하는 거야."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "미디어 협약서",
-              "url": "https://whyme-media-archive.vercel.app/resources/family-media-rule-contract"
             }
           ]
         }
@@ -145,9 +129,7 @@
               "speaker": "parent",
               "text": "그럴 수도 있었겠다. 엄마는 네가 혼자 힘들어지는 게 더 걱정됐어. 지금 바로 다 해결하려는 건 아니고, 네 이야기를 조금씩 다시 들어보고 싶었어."
             }
-          ],
-          "resourceLink": "",
-          "resourceLinks": []
+          ]
         },
         {
           "title": "다시 함께 기준 만들어보기",
@@ -171,13 +153,6 @@
             {
               "speaker": "parent",
               "text": "당장 완벽하게 바꾸자는 건 아니고, 우리 둘 다 덜 지치게 작은 기준부터 다시 같이 정해보려고 했어. 네 생각도 같이 들어보고 싶었고."
-            }
-          ],
-          "resourceLink": "",
-          "resourceLinks": [
-            {
-              "label": "미디어 협약서",
-              "url": "https://whyme-media-archive.vercel.app/resources/family-media-rule-contract"
             }
           ]
         }
