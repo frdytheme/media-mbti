@@ -312,110 +312,236 @@ function GuideResourcesSection({ guides }: { guides: GuideResource[] }) {
   );
 }
 
+const TEMPERAMENT_INSIGHT_GROUPS = [
+  {
+    id: "novelty_seeking",
+    label: "자극추구",
+    highId: "novelty_seeking_high",
+    lowId: "novelty_seeking_low",
+  },
+  {
+    id: "harm_avoidance",
+    label: "위험회피",
+    highId: "harm_avoidance_high",
+    lowId: "harm_avoidance_low",
+  },
+  {
+    id: "reward_dependence",
+    label: "사회적민감성",
+    highId: "reward_dependence_high",
+    lowId: "reward_dependence_low",
+  },
+  {
+    id: "persistence",
+    label: "인내력",
+    highId: "persistence_high",
+    lowId: "persistence_low",
+  },
+] as const;
+
 function TemperamentInsightSection() {
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+
+  function toggleCard(cardId: string) {
+    setSelectedCardId((currentCardId) =>
+      currentCardId === cardId ? null : cardId,
+    );
+  }
+
   return (
-    <section className="rounded-lg border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+    <section className="rounded-lg border border-emerald-950 bg-[#173b36] p-5 text-white shadow-lg shadow-emerald-950/15 dark:border-emerald-800 dark:bg-[#102d29]">
       <header className="flex flex-col gap-3">
-        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
+        <p className="text-sm font-semibold text-emerald-200">
           참고 자료
         </p>
-        <h2 className="text-xl font-bold tracking-normal text-zinc-950 dark:text-zinc-50">
+        <h2 className="text-xl font-bold tracking-normal text-white">
           기질적 관점으로 보는 미디어 습관
         </h2>
-        <ReportText text={temperamentInsightIntro} />
+        <div className="text-sm leading-7 text-emerald-50/90">
+          <ReportText text={temperamentInsightIntro} />
+        </div>
       </header>
 
-      <div className="mt-5 grid gap-3">
-        {temperamentInsightCards.map((card) => (
-          <TemperamentInsightCardView key={card.id} card={card} />
-        ))}
+      <div className="mt-6 grid gap-4">
+        {TEMPERAMENT_INSIGHT_GROUPS.map((group) => {
+          const highCard = temperamentInsightCards.find(
+            (card) => card.id === group.highId,
+          );
+          const lowCard = temperamentInsightCards.find(
+            (card) => card.id === group.lowId,
+          );
+          const selectedCard = temperamentInsightCards.find(
+            (card) =>
+              card.id === selectedCardId &&
+              (card.id === group.highId || card.id === group.lowId),
+          );
+
+          if (!highCard || !lowCard) {
+            return null;
+          }
+
+          return (
+            <section
+              key={group.id}
+              className="overflow-hidden rounded-md border border-emerald-200 bg-emerald-50 shadow-sm dark:border-emerald-800 dark:bg-emerald-950/60"
+            >
+              <div className="flex items-center gap-3 px-3 pt-3">
+                <span className="h-px flex-1 bg-emerald-200 dark:bg-emerald-800" />
+                <h3 className="text-sm font-bold text-emerald-950 dark:text-emerald-100">
+                  {group.label}
+                </h3>
+                <span className="h-px flex-1 bg-emerald-200 dark:bg-emerald-800" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-px p-3">
+                <TemperamentChoiceButton
+                  card={highCard}
+                  direction="high"
+                  isSelected={selectedCardId === highCard.id}
+                  onClick={() => toggleCard(highCard.id)}
+                />
+                <TemperamentChoiceButton
+                  card={lowCard}
+                  direction="low"
+                  isSelected={selectedCardId === lowCard.id}
+                  onClick={() => toggleCard(lowCard.id)}
+                />
+              </div>
+
+              {selectedCard ? (
+                <TemperamentInsightCardContent card={selectedCard} />
+              ) : null}
+            </section>
+          );
+        })}
       </div>
     </section>
   );
 }
 
-function TemperamentInsightCardView({
+function TemperamentChoiceButton({
+  card,
+  direction,
+  isSelected,
+  onClick,
+}: {
+  card: TemperamentInsightCard;
+  direction: "high" | "low";
+  isSelected: boolean;
+  onClick: () => void;
+}) {
+  const isHigh = direction === "high";
+
+  return (
+    <button
+      type="button"
+      aria-expanded={isSelected}
+      aria-controls={`temperament-card-${card.id}`}
+      onClick={onClick}
+      className={`group/choice relative flex min-h-28 cursor-pointer flex-col justify-between overflow-hidden px-3 py-3 text-left transition sm:min-h-24 sm:px-4 ${
+        isHigh
+          ? "rounded-l-md border border-zinc-200 bg-white hover:border-rose-300 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-rose-700"
+          : "rounded-r-md border border-zinc-200 bg-white hover:border-teal-300 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-teal-700"
+      } ${
+        isSelected
+          ? isHigh
+            ? "ring-2 ring-inset ring-rose-400 dark:ring-rose-500"
+            : "ring-2 ring-inset ring-teal-400 dark:ring-teal-500"
+          : ""
+      }`}
+    >
+      <span
+        className={`text-xs font-bold sm:text-sm ${
+          isHigh
+            ? "text-rose-700 dark:text-rose-300"
+            : "text-teal-700 dark:text-teal-300"
+        }`}
+      >
+        {isHigh ? "높은 편이라면" : "낮은 편이라면"}
+      </span>
+      <span className="mt-2 max-w-full text-sm font-semibold leading-5 text-zinc-700 dark:text-zinc-300">
+        “{card.characterLabel}”
+      </span>
+      <span
+        aria-hidden="true"
+        className={`absolute inset-x-3 bottom-2 h-0.5 scale-x-0 transition-transform duration-300 ease-out group-hover/choice:scale-x-100 ${
+          isHigh
+            ? "origin-right bg-rose-500 dark:bg-rose-400"
+            : "origin-left bg-teal-500 dark:bg-teal-400"
+        } ${isSelected ? "scale-x-100" : ""}`}
+      />
+    </button>
+  );
+}
+
+function TemperamentInsightCardContent({
   card,
 }: {
   card: TemperamentInsightCard;
 }) {
   return (
-    <details className="group overflow-hidden rounded-md border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
-      <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 marker:hidden transition hover:bg-zinc-100 dark:hover:bg-zinc-900">
-        <span className="min-w-0">
-          <span className="block text-sm font-bold text-zinc-950 dark:text-zinc-50">
-            {card.title}
-          </span>
-          <span className="mt-1.5 inline-flex max-w-full rounded-md bg-blue-50 px-2 py-1 text-xs font-bold leading-5 text-blue-700 ring-1 ring-blue-100 dark:bg-blue-950 dark:text-blue-200 dark:ring-blue-900">
-            “{card.characterLabel}”
-          </span>
-        </span>
-        <span className="shrink-0 rounded-md bg-white px-2.5 py-1.5 text-xs font-bold text-zinc-600 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:text-zinc-300 dark:ring-zinc-800">
-          <span className="group-open:hidden">펼쳐보기</span>
-          <span className="hidden group-open:inline">접기</span>
-        </span>
-      </summary>
-
-      <div className="border-t border-zinc-200 bg-white px-4 py-4 dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="mt-4">
-          <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
-            함께 살펴볼 리포트 영역
-          </p>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {card.relatedDomains.map((domainId) => (
-              <span
-                key={domainId}
-                className="rounded-md bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100 dark:bg-blue-950 dark:text-blue-200 dark:ring-blue-900"
-              >
-                {mediaDomainLabels[domainId]}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-4 grid gap-3">
-          <TemperamentBodyItem
-            label="이런 모습으로 보일 수 있어요"
-            text={card.body.childPattern}
-          />
-          <TemperamentBodyItem
-            label="이 힘은 자원이기도 해요"
-            text={card.body.strengthFrame}
-          />
-          <TemperamentBodyItem
-            label="다만 미디어 환경에서는"
-            text={card.body.mediaRisk}
-          />
-          <TemperamentBodyItem
-            label="이 영역을 함께 살펴보세요"
-            text={card.body.readingGuide}
-          />
-          <TemperamentBodyItem
-            label="이런 말이 더 잘 닿을 수 있어요"
-            text={card.body.parentApproach}
-          />
-        </div>
-
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-md bg-zinc-50 p-3 dark:bg-zinc-950">
-            <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
-              살펴볼 지점
-            </p>
-            <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
-              {card.watchPoint}
-            </p>
-          </div>
-          <div className="rounded-md bg-blue-50 p-3 dark:bg-blue-950">
-            <p className="text-xs font-bold text-blue-700 dark:text-blue-200">
-              부모 첫마디
-            </p>
-            <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
-              {card.parentPhrase}
-            </p>
-          </div>
+    <div
+      id={`temperament-card-${card.id}`}
+      className="border-t border-zinc-200 bg-white px-4 py-4 dark:border-zinc-800 dark:bg-zinc-900"
+    >
+      <div>
+        <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
+          함께 살펴볼 리포트 영역
+        </p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {card.relatedDomains.map((domainId) => (
+            <span
+              key={domainId}
+              className="rounded-md bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800 ring-1 ring-emerald-200 dark:bg-emerald-950 dark:text-emerald-200 dark:ring-emerald-800"
+            >
+              {mediaDomainLabels[domainId]}
+            </span>
+          ))}
         </div>
       </div>
-    </details>
+
+      <div className="mt-5 grid gap-7">
+        <TemperamentBodyItem
+          label="이런 모습으로 보일 수 있어요"
+          text={card.body.childPattern}
+        />
+        <TemperamentBodyItem
+          label="이 힘은 자원이기도 해요"
+          text={card.body.strengthFrame}
+        />
+        <TemperamentBodyItem
+          label="다만 미디어 환경에서는"
+          text={card.body.mediaRisk}
+        />
+        <TemperamentBodyItem
+          label="이 영역을 함께 살펴보세요"
+          text={card.body.readingGuide}
+        />
+        <TemperamentBodyItem
+          label="이런 말이 더 잘 닿을 수 있어요"
+          text={card.body.parentApproach}
+        />
+      </div>
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <div className="rounded-md bg-zinc-50 p-3 dark:bg-zinc-950">
+          <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
+            살펴볼 지점
+          </p>
+          <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+            {card.watchPoint}
+          </p>
+        </div>
+        <div className="rounded-md bg-emerald-50 p-3 dark:bg-emerald-950">
+          <p className="text-xs font-bold text-emerald-800 dark:text-emerald-200">
+            부모 첫마디
+          </p>
+          <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+            {card.parentPhrase}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -428,10 +554,10 @@ function TemperamentBodyItem({
 }) {
   return (
     <div>
-      <p className="text-xs font-bold text-blue-700 dark:text-blue-300">
+      <p className="text-sm font-bold text-emerald-800 dark:text-emerald-300">
         {label}
       </p>
-      <div className="mt-1 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+      <div className="mt-2 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
         <ReportText text={text} />
       </div>
     </div>
@@ -805,7 +931,7 @@ export default function ResultPage() {
               })}
             </section>
 
-            <TemperamentInsightSection />
+            {audience === "parent" ? <TemperamentInsightSection /> : null}
 
             <div className="flex justify-end gap-2">
               <button
