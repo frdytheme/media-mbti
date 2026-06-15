@@ -21,6 +21,12 @@ import studentGameSpendingReport from "../../src/data/student/reports/game-spend
 import studentSocialSafetyReport from "../../src/data/student/reports/social-safety-report.json";
 import studentTimeControlReport from "../../src/data/student/reports/time-control-report.json";
 import {
+  studentMediaDomainLabels,
+  studentTemperamentInsightCards,
+  studentTemperamentInsightIntro,
+  studentTemperamentLeadTitle,
+} from "../../src/data/student/temperament-insights";
+import {
   getGuideResourcesForCategory,
   type GuideResource,
 } from "../../src/data/guide-resources";
@@ -28,6 +34,7 @@ import {
   mediaDomainLabels,
   temperamentInsightCards,
   temperamentInsightIntro,
+  type MediaDomainId,
   type TemperamentInsightCard,
 } from "../../src/data/temperament-insights";
 import { calculateCategoryScores } from "../../src/lib/scoring";
@@ -339,8 +346,16 @@ const TEMPERAMENT_INSIGHT_GROUPS = [
   },
 ] as const;
 
-function TemperamentInsightSection() {
+function TemperamentInsightSection({ audience }: { audience: TestAudience }) {
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const isStudent = audience === "student";
+  const insightCards = isStudent
+    ? studentTemperamentInsightCards
+    : temperamentInsightCards;
+  const insightIntro = isStudent
+    ? studentTemperamentInsightIntro
+    : temperamentInsightIntro;
+  const domainLabels = isStudent ? studentMediaDomainLabels : mediaDomainLabels;
 
   function toggleCard(cardId: string) {
     setSelectedCardId((currentCardId) =>
@@ -352,25 +367,25 @@ function TemperamentInsightSection() {
     <section className="rounded-lg border border-emerald-950 bg-[#173b36] p-5 text-white shadow-lg shadow-emerald-950/15 dark:border-emerald-800 dark:bg-[#102d29]">
       <header className="flex flex-col gap-3">
         <p className="text-sm font-semibold text-emerald-200">
-          참고 자료
+          {isStudent ? "나를 이해하는 힌트" : "참고 자료"}
         </p>
         <h2 className="text-xl font-bold tracking-normal text-white">
           기질적 관점으로 보는 미디어 습관
         </h2>
         <div className="text-sm leading-7 text-emerald-50/90">
-          <ReportText text={temperamentInsightIntro} />
+          <ReportText text={insightIntro} />
         </div>
       </header>
 
       <div className="mt-6 grid gap-4">
         {TEMPERAMENT_INSIGHT_GROUPS.map((group) => {
-          const highCard = temperamentInsightCards.find(
+          const highCard = insightCards.find(
             (card) => card.id === group.highId,
           );
-          const lowCard = temperamentInsightCards.find(
+          const lowCard = insightCards.find(
             (card) => card.id === group.lowId,
           );
-          const selectedCard = temperamentInsightCards.find(
+          const selectedCard = insightCards.find(
             (card) =>
               card.id === selectedCardId &&
               (card.id === group.highId || card.id === group.lowId),
@@ -409,7 +424,11 @@ function TemperamentInsightSection() {
               </div>
 
               {selectedCard ? (
-                <TemperamentInsightCardContent card={selectedCard} />
+                <TemperamentInsightCardContent
+                  audience={audience}
+                  card={selectedCard}
+                  domainLabels={domainLabels}
+                />
               ) : null}
             </section>
           );
@@ -475,10 +494,16 @@ function TemperamentChoiceButton({
 }
 
 function TemperamentInsightCardContent({
+  audience,
   card,
+  domainLabels,
 }: {
+  audience: TestAudience;
   card: TemperamentInsightCard;
+  domainLabels: Record<MediaDomainId, string>;
 }) {
+  const isStudent = audience === "student";
+
   return (
     <div
       id={`temperament-card-${card.id}`}
@@ -486,7 +511,9 @@ function TemperamentInsightCardContent({
     >
       <div>
         <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
-          함께 살펴볼 리포트 영역
+          {isStudent
+            ? "같이 확인해볼 리포트 영역"
+            : "함께 살펴볼 리포트 영역"}
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
           {card.relatedDomains.map((domainId) => (
@@ -494,7 +521,7 @@ function TemperamentInsightCardContent({
               key={domainId}
               className="rounded-md bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800 ring-1 ring-emerald-200 dark:bg-emerald-950 dark:text-emerald-200 dark:ring-emerald-800"
             >
-              {mediaDomainLabels[domainId]}
+              {domainLabels[domainId]}
             </span>
           ))}
         </div>
@@ -502,11 +529,15 @@ function TemperamentInsightCardContent({
 
       <div className="mt-5 grid gap-7">
         <TemperamentBodyItem
-          label="이런 모습으로 보일 수 있어요"
+          label={
+            isStudent ? "이런 모습이 있을 수 있어" : "이런 모습으로 보일 수 있어요"
+          }
           text={card.body.childPattern}
         />
         <TemperamentBodyItem
-          label="이 힘은 자원이기도 해요"
+          label={
+            isStudent ? "이건 너의 장점이기도 해" : "이 힘은 자원이기도 해요"
+          }
           text={card.body.strengthFrame}
         />
         <TemperamentBodyItem
@@ -514,11 +545,17 @@ function TemperamentInsightCardContent({
           text={card.body.mediaRisk}
         />
         <TemperamentBodyItem
-          label="이 영역을 함께 살펴보세요"
+          label={
+            isStudent ? "이 영역을 같이 확인해봐" : "이 영역을 함께 살펴보세요"
+          }
           text={card.body.readingGuide}
         />
         <TemperamentBodyItem
-          label="이런 말이 더 잘 닿을 수 있어요"
+          label={
+            isStudent
+              ? "이렇게 해보면 도움이 될 수 있어"
+              : "이런 말이 더 잘 닿을 수 있어요"
+          }
           text={card.body.parentApproach}
         />
       </div>
@@ -526,7 +563,7 @@ function TemperamentInsightCardContent({
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <div className="rounded-md bg-zinc-50 p-3 dark:bg-zinc-950">
           <p className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
-            살펴볼 지점
+            {isStudent ? "스스로 체크해볼 점" : "살펴볼 지점"}
           </p>
           <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
             {card.watchPoint}
@@ -534,7 +571,7 @@ function TemperamentInsightCardContent({
         </div>
         <div className="rounded-md bg-emerald-50 p-3 dark:bg-emerald-950">
           <p className="text-xs font-bold text-emerald-800 dark:text-emerald-200">
-            부모 첫마디
+            {isStudent ? "부모님과 이렇게 말해봐" : "부모 첫마디"}
           </p>
           <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
             {card.parentPhrase}
@@ -931,7 +968,19 @@ export default function ResultPage() {
               })}
             </section>
 
-            {audience === "parent" ? <TemperamentInsightSection /> : null}
+            {audience === "student" ? (
+              <section className="px-2 py-10 text-center sm:px-6 sm:py-14">
+                <p className="text-2xl font-bold leading-10 text-zinc-950 sm:text-3xl sm:leading-[1.5] dark:text-zinc-50">
+                  {studentTemperamentLeadTitle.split("\n").map((line) => (
+                    <span key={line} className="block break-keep">
+                      {line}
+                    </span>
+                  ))}
+                </p>
+              </section>
+            ) : null}
+
+            <TemperamentInsightSection audience={audience} />
 
             <div className="flex justify-end gap-2">
               <button
