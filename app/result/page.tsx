@@ -530,13 +530,17 @@ function TemperamentInsightCardContent({
       <div className="mt-5 grid gap-7">
         <TemperamentBodyItem
           label={
-            isStudent ? "이런 모습이 있을 수 있어" : "이런 모습으로 보일 수 있어요"
+            isStudent
+              ? "이런 모습이 있을 수 있어요"
+              : "이런 모습으로 보일 수 있어요"
           }
           text={card.body.childPattern}
         />
         <TemperamentBodyItem
           label={
-            isStudent ? "이건 너의 장점이기도 해" : "이 힘은 자원이기도 해요"
+            isStudent
+              ? "이건 장점이기도 해요"
+              : "이 힘은 자원이기도 해요"
           }
           text={card.body.strengthFrame}
         />
@@ -546,14 +550,16 @@ function TemperamentInsightCardContent({
         />
         <TemperamentBodyItem
           label={
-            isStudent ? "이 영역을 같이 확인해봐" : "이 영역을 함께 살펴보세요"
+            isStudent
+              ? "이 영역을 같이 확인해보세요"
+              : "이 영역을 함께 살펴보세요"
           }
           text={card.body.readingGuide}
         />
         <TemperamentBodyItem
           label={
             isStudent
-              ? "이렇게 해보면 도움이 될 수 있어"
+              ? "이렇게 해보면 도움이 될 수 있어요"
               : "이런 말이 더 잘 닿을 수 있어요"
           }
           text={card.body.parentApproach}
@@ -571,7 +577,7 @@ function TemperamentInsightCardContent({
         </div>
         <div className="rounded-md bg-emerald-50 p-3 dark:bg-emerald-950">
           <p className="text-xs font-bold text-emerald-800 dark:text-emerald-200">
-            {isStudent ? "부모님과 이렇게 말해봐" : "부모 첫마디"}
+            {isStudent ? "부모님께 이렇게 말해보세요" : "부모 첫마디"}
           </p>
           <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
             {card.parentPhrase}
