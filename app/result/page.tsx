@@ -732,6 +732,10 @@ export default function ResultPage() {
     setIsWmqiImageOpen(false);
   }
 
+  function printResult() {
+    window.print();
+  }
+
   return (
     <main className="min-h-screen bg-zinc-50 px-4 py-8 text-zinc-950 sm:px-6 dark:bg-zinc-950 dark:text-zinc-50">
       <HomeNavigation onNavigate={confirmResultNavigation} />
@@ -988,7 +992,14 @@ export default function ResultPage() {
 
             <TemperamentInsightSection audience={audience} />
 
-            <div className="flex justify-end gap-2">
+            <div className="app-print-hidden flex flex-wrap justify-end gap-2 print:hidden">
+              <button
+                type="button"
+                onClick={printResult}
+                className="inline-flex h-11 cursor-pointer items-center rounded-md bg-emerald-700 px-5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-emerald-800 hover:shadow-md active:translate-y-0"
+              >
+                PDF 저장
+              </button>
               <button
                 type="button"
                 onClick={goHomeFromResult}
